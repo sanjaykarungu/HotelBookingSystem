@@ -15,17 +15,15 @@ const Country = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("🔍 Testing backend connection for Country component...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
         
         if (!testResponse.ok) {
           throw new Error(`Backend test failed with status: ${testResponse.status}`);
         }
         
-        const testData = await testResponse.json();
-        console.log("✅ Backend connection successful:", testData);
+        await testResponse.json();
       } catch (testError) {
-        console.error("❌ Backend connection test failed:", testError);
+        console.error("Backend connection test failed:", testError);
       }
     };
     
@@ -38,7 +36,6 @@ const Country = () => {
       try {
         setLoading(true);
         setError(null);
-        console.log(`🔄 Fetching country data for ID: ${id}`);
         
         const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/${id}`, {
           method: 'GET',
@@ -48,52 +45,38 @@ const Country = () => {
           },
         });
         
-        console.log("📡 Response status:", response.status);
-        console.log("📡 Response ok:", response.ok);
-        
         if (!response.ok) {
           const errorText = await response.text();
-          console.error("❌ Response error text:", errorText);
-          throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log("📦 Full API response:", data);
         
         // Handle different response formats
         let countryData = null;
         let hotelsData = [];
         
         if (data.data) {
-          console.log("✅ Country data found in data.data");
           countryData = data.data;
         } else if (data) {
-          console.log("✅ Country data found directly");
           countryData = data;
         } else {
-          console.warn("⚠️ Unexpected data format:", data);
           throw new Error('Invalid country data format from API');
         }
         
         setCountry(countryData);
         
         // Extract hotels data - handle different possible structures
-        console.log("🔍 Searching for hotels in country data...");
-        console.log("🔍 Country object keys:", Object.keys(countryData));
-        
-        // Try multiple approaches to find hotels
         if (countryData.hotels && Array.isArray(countryData.hotels)) {
-          console.log(`✅ Hotels found in country.hotels: ${countryData.hotels.length} items`);
           hotelsData = countryData.hotels;
         } else if (countryData.properties && Array.isArray(countryData.properties)) {
-          console.log(`✅ Hotels found in country.properties: ${countryData.properties.length} items`);
           hotelsData = countryData.properties;
         } else {
           // Try to find hotels by country name or other keys
           const countryName = countryData.country ? countryData.country.toLowerCase().replace(' ', '') : '';
           const possibleKeys = [
             countryName,
-            'germany', 'france', 'italy', 'spain', 'usa', 'uk', 'japan', // Common country names
+            'germany', 'france', 'italy', 'spain', 'usa', 'uk', 'japan',
             'luxury_hotel', 'beach_resort', 'mountain_cabin', 'city_apartment',
             'boutique_hotel', 'home_stay', 'treehouse_resort', 'hostel',
             'cottage', 'houseboat', 'villa', 'resort'
@@ -101,7 +84,6 @@ const Country = () => {
           
           for (const key of possibleKeys) {
             if (key && countryData[key] && Array.isArray(countryData[key])) {
-              console.log(`✅ Hotels found in country.${key}: ${countryData[key].length} items`);
               hotelsData = countryData[key];
               break;
             }
@@ -109,13 +91,11 @@ const Country = () => {
           
           // If still no hotels found, search all arrays in the country data
           if (hotelsData.length === 0) {
-            console.log("🔍 Searching all arrays in country data");
             for (const key in countryData) {
               if (Array.isArray(countryData[key]) && countryData[key].length > 0) {
                 // Check if this array contains hotel-like objects
                 const firstItem = countryData[key][0];
                 if (firstItem && (firstItem.name || firstItem.price || firstItem.image_url)) {
-                  console.log(`✅ Hotels found in country.${key}: ${countryData[key].length} items`);
                   hotelsData = countryData[key];
                   break;
                 }
@@ -124,15 +104,9 @@ const Country = () => {
           }
         }
         
-        console.log(`ℹ️ Final hotels data: ${hotelsData.length} items`);
         setCountryHotels(hotelsData);
         
       } catch (err) {
-        console.error('❌ Error fetching country:', err);
-        console.error('🔍 Error details:', {
-          message: err.message,
-          name: err.name,
-        });
         setError('Failed to load country details: ' + err.message);
       } finally {
         setLoading(false);
@@ -151,7 +125,6 @@ const Country = () => {
   const handleHotelClick = (hotel, e) => {
     e.stopPropagation();
     const hotelId = hotel._id || hotel.id;
-    console.log("🔗 Navigating to hotel:", hotelId);
     navigate(`/country/${id}/hotels/${hotelId}`);
   }
 
@@ -190,7 +163,6 @@ const Country = () => {
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
     
-    console.log('🛒 Added to cart:', cartItem);
     alert(`${hotel.name || 'Hotel'} added to cart successfully!`);
   }
 
@@ -259,16 +231,9 @@ const Country = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8 max-w-md">
           <div className="bg-red-50 border border-red-200 rounded-xl p-8">
-            <div className="text-red-600 text-4xl mb-4">⚠️</div>
             <h3 className="text-red-800 text-xl font-bold mb-3">
               Failed to Load Country
             </h3>
-            <p className="text-red-600 text-base mb-4">
-              {error}
-            </p>
-            <p className="text-gray-600 text-sm mb-6">
-              Please check if the backend server is running and try again.
-            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button 
                 onClick={() => window.location.reload()} 
@@ -293,9 +258,7 @@ const Country = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
-          <div className="text-gray-400 text-6xl mb-4">🌍</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Country Not Found</h1>
-          <p className="text-gray-600 text-lg mb-6">The country you're looking for doesn't exist.</p>
           <button 
             onClick={() => navigate('/')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
@@ -310,13 +273,6 @@ const Country = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-5 py-10">
-        {/* Debug Info */}
-        <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-          <p className="text-green-700 text-sm">
-            ✅ Country data loaded successfully | ID: {id} | Country: {country.country || country.name} | Hotels: {countryHotels.length}
-          </p>
-        </div>
-
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
@@ -377,9 +333,6 @@ const Country = () => {
               <h2 className="font-bold text-gray-900 text-3xl md:text-4xl mb-4">
                 Premium Hotels in {country.country || country.name}
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Handpicked accommodations offering exceptional comfort and authentic {country.country || country.name} experiences
-              </p>
             </div>
             
             {/* List View Container */}
@@ -490,13 +443,9 @@ const Country = () => {
           </div>
         ) : (
           <div className="text-center py-16 bg-white rounded-3xl shadow-lg border border-gray-200">
-            <div className="text-6xl mb-4">🏨</div>
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               Hotels Coming Soon to {country.country || country.name}
             </h3>
-            <p className="text-gray-600 text-lg max-w-md mx-auto mb-6">
-              We're working on bringing you the best accommodations in {country.country || country.name}. Check back soon for amazing hotel options!
-            </p>
             <button 
               onClick={() => navigate('/')}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200"
