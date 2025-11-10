@@ -29,7 +29,7 @@ const PropertyRoomDetails = () => {
         setLoading(true);
         
         // Fetch property data
-        const propertyResponse = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/property/${propertyId}`);
+        const propertyResponse = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/${propertyId}`);
         
         if (!propertyResponse.ok) {
           throw new Error('Failed to fetch property data');
