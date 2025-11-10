@@ -9,23 +9,131 @@ const Country = () => {
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [countryHotels, setCountryHotels] = useState([]);
+
+  // Test backend connection first
+  useEffect(() => {
+    const testBackendConnection = async () => {
+      try {
+        console.log("🔍 Testing backend connection for Country component...");
+        const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
+        
+        if (!testResponse.ok) {
+          throw new Error(`Backend test failed with status: ${testResponse.status}`);
+        }
+        
+        const testData = await testResponse.json();
+        console.log("✅ Backend connection successful:", testData);
+      } catch (testError) {
+        console.error("❌ Backend connection test failed:", testError);
+      }
+    };
+    
+    testBackendConnection();
+  }, []);
 
   // Fetch country data from your backend API
   useEffect(() => {
     const fetchCountry = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/world/${id}`);
+        setError(null);
+        console.log(`🔄 Fetching country data for ID: ${id}`);
+        
+        const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        });
+        
+        console.log("📡 Response status:", response.status);
+        console.log("📡 Response ok:", response.ok);
         
         if (!response.ok) {
-          throw new Error('Failed to fetch country data');
+          const errorText = await response.text();
+          console.error("❌ Response error text:", errorText);
+          throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
         }
         
         const data = await response.json();
-        setCountry(data.data || data); // Adjust based on your API response structure
+        console.log("📦 Full API response:", data);
+        
+        // Handle different response formats
+        let countryData = null;
+        let hotelsData = [];
+        
+        if (data.data) {
+          console.log("✅ Country data found in data.data");
+          countryData = data.data;
+        } else if (data) {
+          console.log("✅ Country data found directly");
+          countryData = data;
+        } else {
+          console.warn("⚠️ Unexpected data format:", data);
+          throw new Error('Invalid country data format from API');
+        }
+        
+        setCountry(countryData);
+        
+        // Extract hotels data - handle different possible structures
+        console.log("🔍 Searching for hotels in country data...");
+        console.log("🔍 Country object keys:", Object.keys(countryData));
+        
+        // Try multiple approaches to find hotels
+        if (countryData.hotels && Array.isArray(countryData.hotels)) {
+          console.log(`✅ Hotels found in country.hotels: ${countryData.hotels.length} items`);
+          hotelsData = countryData.hotels;
+        } else if (countryData.properties && Array.isArray(countryData.properties)) {
+          console.log(`✅ Hotels found in country.properties: ${countryData.properties.length} items`);
+          hotelsData = countryData.properties;
+        } else {
+          // Try to find hotels by country name or other keys
+          const countryName = countryData.country ? countryData.country.toLowerCase().replace(' ', '') : '';
+          const possibleKeys = [
+            countryName,
+            'germany', 'france', 'italy', 'spain', 'usa', 'uk', 'japan', // Common country names
+            'luxury_hotel', 'beach_resort', 'mountain_cabin', 'city_apartment',
+            'boutique_hotel', 'home_stay', 'treehouse_resort', 'hostel',
+            'cottage', 'houseboat', 'villa', 'resort'
+          ];
+          
+          for (const key of possibleKeys) {
+            if (key && countryData[key] && Array.isArray(countryData[key])) {
+              console.log(`✅ Hotels found in country.${key}: ${countryData[key].length} items`);
+              hotelsData = countryData[key];
+              break;
+            }
+          }
+          
+          // If still no hotels found, search all arrays in the country data
+          if (hotelsData.length === 0) {
+            console.log("🔍 Searching all arrays in country data");
+            for (const key in countryData) {
+              if (Array.isArray(countryData[key]) && countryData[key].length > 0) {
+                // Check if this array contains hotel-like objects
+                const firstItem = countryData[key][0];
+                if (firstItem && (firstItem.name || firstItem.price || firstItem.image_url)) {
+                  console.log(`✅ Hotels found in country.${key}: ${countryData[key].length} items`);
+                  hotelsData = countryData[key];
+                  break;
+                }
+              }
+            }
+          }
+        }
+        
+        console.log(`ℹ️ Final hotels data: ${hotelsData.length} items`);
+        setCountryHotels(hotelsData);
+        
       } catch (err) {
-        setError(err.message);
-        console.error('Error fetching country:', err);
+        console.error('❌ Error fetching country:', err);
+        console.error('🔍 Error details:', {
+          message: err.message,
+          name: err.name,
+        });
+        setError('Failed to load country details: ' + err.message);
       } finally {
         setLoading(false);
       }
@@ -33,116 +141,37 @@ const Country = () => {
 
     if (id) {
       fetchCountry();
+    } else {
+      setError('No country ID provided');
+      setLoading(false);
     }
   }, [id]);
-
-  // Debug logs
-  console.log('Country ID:', id);
-  console.log('Country found:', country);
-
-  // Loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Loading...</h1>
-          <p className="text-gray-600 text-lg mb-6">Fetching country details...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Error Loading Country</h1>
-          <p className="text-red-500 text-lg mb-6">{error}</p>
-          <button 
-            onClick={() => navigate('/')}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
-          >
-            Back to Home
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!country) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Country Not Found</h1>
-          <p className="text-gray-600 text-lg mb-6">The country you're looking for doesn't exist.</p>
-          <button 
-            onClick={() => navigate('/')}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
-          >
-            Back to Home
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Get hotels for the country - adjusted for API data structure
-  const getCountryHotels = () => {
-    console.log('Country object keys:', Object.keys(country));
-    
-    // Try different possible keys for hotels
-    const possibleKeys = [
-      'hotels',
-      'hotel',
-      'properties',
-      country.country?.toLowerCase().replace(' ', '_'),
-      country.country?.toLowerCase().replace(' ', ''),
-      'germnany', // Your specific key from the JSON example
-      'luxury_hotel',
-      'beach_resort',
-      'mountain_cabin',
-      'city_apartment',
-      'boutique_hotel',
-      'home_stay',
-      'treehouse_resort',
-      'hostel',
-      'cottage',
-      'houseboat'
-    ];
-    
-    for (const key of possibleKeys) {
-      if (country[key] && Array.isArray(country[key])) {
-        console.log('Found hotels with key:', key);
-        return country[key];
-      }
-    }
-    
-    console.log('No hotel array found in country object');
-    return [];
-  };
-
-  const countryHotels = getCountryHotels();
-  console.log('Country hotels:', countryHotels);
 
   // Function to handle hotel click
   const handleHotelClick = (hotel, e) => {
     e.stopPropagation();
-    navigate(`/country/${id}/hotels/${hotel.id || hotel._id}`);
+    const hotelId = hotel._id || hotel.id;
+    console.log("🔗 Navigating to hotel:", hotelId);
+    navigate(`/country/${id}/hotels/${hotelId}`);
   }
 
   // Function to handle add to cart
   const handleAddToCart = (hotel, e) => {
     e.stopPropagation();
     
-    // Create cart item
+    if (!hotel) {
+      alert('Hotel data not available');
+      return;
+    }
+
+    // Create cart item with fallback values
     const cartItem = {
-      id: hotel.id || hotel._id,
-      name: hotel.name,
-      price: hotel.price,
-      image: hotel.image_url,
-      rating: hotel.rating,
-      address: hotel.address,
+      id: hotel._id || hotel.id || Date.now().toString(),
+      name: hotel.name || 'Unnamed Hotel',
+      price: hotel.price || hotel.price_per_night || hotel.starting_price || 0,
+      image: hotel.image_url || hotel.image || hotel.photo,
+      rating: hotel.rating || hotel.star_rating,
+      address: hotel.address || hotel.location || 'Address not available',
       quantity: 1
     };
 
@@ -161,27 +190,140 @@ const Country = () => {
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
     
-    alert(`${hotel.name} added to cart successfully!`);
-    console.log('Added to cart:', cartItem);
+    console.log('🛒 Added to cart:', cartItem);
+    alert(`${hotel.name || 'Hotel'} added to cart successfully!`);
   }
 
   // Calculate average rating and price range
   const stats = countryHotels.length > 0 ? {
-    averageRating: (countryHotels.reduce((acc, hotel) => acc + (hotel.rating || 0), 0) / countryHotels.length).toFixed(1),
-    minPrice: Math.min(...countryHotels.map(hotel => hotel.price || 0)),
-    maxPrice: Math.max(...countryHotels.map(hotel => hotel.price || 0))
+    averageRating: (countryHotels.reduce((acc, hotel) => acc + (hotel.rating || hotel.star_rating || 0), 0) / countryHotels.length).toFixed(1),
+    minPrice: Math.min(...countryHotels.map(hotel => hotel.price || hotel.price_per_night || hotel.starting_price || 0)),
+    maxPrice: Math.max(...countryHotels.map(hotel => hotel.price || hotel.price_per_night || hotel.starting_price || 0))
   } : null;
+
+  // Enhanced loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-5 py-10">
+          {/* Skeleton Header */}
+          <div className="text-center mb-12">
+            <div className="animate-pulse bg-gray-300 h-12 rounded w-1/2 mx-auto mb-6"></div>
+            <div className="animate-pulse bg-gray-300 h-6 rounded w-3/4 mx-auto"></div>
+          </div>
+          
+          {/* Skeleton Country Image */}
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-16">
+            <div className="animate-pulse bg-gray-300 h-96 md:h-[500px]"></div>
+          </div>
+
+          {/* Skeleton Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-white rounded-2xl p-6 text-center shadow-lg">
+                <div className="animate-pulse bg-gray-300 h-8 rounded w-16 mx-auto mb-2"></div>
+                <div className="animate-pulse bg-gray-300 h-4 rounded w-24 mx-auto"></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Skeleton Hotels */}
+          <div className="space-y-6">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-white rounded-2xl p-6 animate-pulse">
+                <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="lg:w-1/4">
+                    <div className="bg-gray-300 h-48 lg:h-40 rounded-xl"></div>
+                  </div>
+                  <div className="lg:w-2/4 space-y-3">
+                    <div className="bg-gray-300 h-6 rounded w-3/4"></div>
+                    <div className="bg-gray-300 h-4 rounded w-full"></div>
+                    <div className="bg-gray-300 h-4 rounded w-2/3"></div>
+                  </div>
+                  <div className="lg:w-1/4 space-y-3">
+                    <div className="bg-gray-300 h-8 rounded w-20 ml-auto"></div>
+                    <div className="bg-gray-300 h-12 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Enhanced error state
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8 max-w-md">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8">
+            <div className="text-red-600 text-4xl mb-4">⚠️</div>
+            <h3 className="text-red-800 text-xl font-bold mb-3">
+              Failed to Load Country
+            </h3>
+            <p className="text-red-600 text-base mb-4">
+              {error}
+            </p>
+            <p className="text-gray-600 text-sm mb-6">
+              Please check if the backend server is running and try again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Retry
+              </button>
+              <button 
+                onClick={() => navigate('/')}
+                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Back to Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!country) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8">
+          <div className="text-gray-400 text-6xl mb-4">🌍</div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Country Not Found</h1>
+          <p className="text-gray-600 text-lg mb-6">The country you're looking for doesn't exist.</p>
+          <button 
+            onClick={() => navigate('/')}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-5 py-10">
+        {/* Debug Info */}
+        <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+          <p className="text-green-700 text-sm">
+            ✅ Country data loaded successfully | ID: {id} | Country: {country.country || country.name} | Hotels: {countryHotels.length}
+          </p>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
             Explore Incredible World
           </h1>
           <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Discover the beauty and hospitality of {country.country} through our curated selection of premium accommodations.
+            Discover the beauty and hospitality of {country.country || country.name} through our curated selection of premium accommodations.
           </p>
         </div>
         
@@ -189,17 +331,20 @@ const Country = () => {
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-16 border border-gray-200">
           <div className="relative h-96 md:h-[500px]">
             <img
-              src={country.image_url || "https://via.placeholder.com/800x500?text=Country+Image"}
-              alt={country.country}
+              src={country.image_url || country.image || country.photo || "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=400"}
+              alt={country.country || country.name || "Country"}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=400";
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
               <h1 className="font-bold text-4xl md:text-5xl mb-4">
-                {country.country}
+                {country.country || country.name || "Country"}
               </h1>
               <p className="text-lg md:text-xl opacity-90 max-w-4xl">
-                {country.description}
+                {country.description || country.overview || "Explore the beautiful destinations and accommodations in this amazing country."}
               </p>
             </div>
           </div>
@@ -227,13 +372,13 @@ const Country = () => {
 
         {/* Hotels Section - List View */}
         {countryHotels.length > 0 ? (
-          <div className="mb-16 ">
+          <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="font-bold text-gray-900 text-3xl md:text-4xl mb-4">
-                Premium Hotels in {country.country}
+                Premium Hotels in {country.country || country.name}
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Handpicked accommodations offering exceptional comfort and authentic {country.country} experiences
+                Handpicked accommodations offering exceptional comfort and authentic {country.country || country.name} experiences
               </p>
             </div>
             
@@ -241,22 +386,27 @@ const Country = () => {
             <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
               {countryHotels.map((hotel, index) => (
                 <div 
-                  key={hotel.id || hotel._id} 
-                  className={`border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-all duration-200`}
+                  key={hotel._id || hotel.id || index} 
+                  className={`border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-all duration-200 ${
+                    index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                  }`}
                 >
-                  <div className="p-6">
+                  <div className="p-10">
                     <div className="flex flex-col lg:flex-row gap-6">
                       {/* Hotel Image */}
                       <div className="lg:w-1/4">
                         <div className="relative rounded-xl overflow-hidden">
                           <img
-                            src={hotel.image_url || "https://via.placeholder.com/300x200?text=Hotel+Image"}
-                            alt={hotel.name}
+                            src={hotel.image_url || hotel.image || hotel.photo || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+                            alt={hotel.name || "Hotel"}
                             className="w-full h-48 lg:h-40 object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                             onClick={(e) => handleHotelClick(hotel, e)}
+                            onError={(e) => {
+                              e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
+                            }}
                           />
                           <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 text-white px-2 py-1 rounded-full">
-                            <span className="font-semibold text-sm">{hotel.rating || 'N/A'}</span>
+                            <span className="font-semibold text-sm">{hotel.rating || hotel.star_rating || "N/A"}</span>
                             <span className="text-yellow-400 text-xs">⭐</span>
                           </div>
                         </div>
@@ -268,24 +418,24 @@ const Country = () => {
                           <div className="flex justify-between items-start mb-2">
                             <h3 className="font-bold text-gray-900 text-xl hover:text-blue-600 transition-colors duration-200 cursor-pointer"
                                 onClick={(e) => handleHotelClick(hotel, e)}>
-                              {hotel.name}
+                              {hotel.name || "Unnamed Hotel"}
                             </h3>
                             <button 
                               onClick={(e) => handleAddToCart(hotel, e)}
                               className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors duration-200 p-2 rounded-lg hover:bg-blue-50 ml-4"
                             >
                               <BiSolidCartAdd className="w-5 h-5" />
-                              <span className="text-sm font-medium hidden sm:inline">Add to Cart</span>
+                              <span className="text-sm font-medium">Add to Cart</span>
                             </button>
                           </div>
                           
                           <p className="text-gray-600 text-sm mb-3 leading-relaxed line-clamp-2">
-                            {hotel.description}
+                            {hotel.description || hotel.overview || "A comfortable and well-appointed accommodation for your stay."}
                           </p>
                           
                           <div className="flex items-center gap-2 text-gray-500 text-sm mb-3">
                             <span className="text-red-500">📍</span>
-                            <span className="line-clamp-1">{hotel.address}</span>
+                            <span className="line-clamp-1">{hotel.address || hotel.location || "Address not available"}</span>
                           </div>
 
                           {/* Features */}
@@ -311,7 +461,7 @@ const Country = () => {
                         <div className="text-right mb-4 lg:mb-0">
                           <span className="text-gray-500 text-sm block mb-1">Starting from</span>
                           <span className="text-2xl font-bold text-blue-700">
-                            ₹{(hotel.price || 0).toLocaleString()}
+                            ₹{(hotel.price || hotel.price_per_night || hotel.starting_price || 0).toLocaleString()}
                             <span className="text-sm text-gray-500 font-normal">/night</span>
                           </span>
                         </div>
@@ -342,10 +492,10 @@ const Country = () => {
           <div className="text-center py-16 bg-white rounded-3xl shadow-lg border border-gray-200">
             <div className="text-6xl mb-4">🏨</div>
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
-              Hotels Coming Soon to {country.country}
+              Hotels Coming Soon to {country.country || country.name}
             </h3>
             <p className="text-gray-600 text-lg max-w-md mx-auto mb-6">
-              We're working on bringing you the best accommodations in {country.country}. Check back soon for amazing hotel options!
+              We're working on bringing you the best accommodations in {country.country || country.name}. Check back soon for amazing hotel options!
             </p>
             <button 
               onClick={() => navigate('/')}
