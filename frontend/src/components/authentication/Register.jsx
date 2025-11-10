@@ -66,47 +66,68 @@ const Register = () => {
       console.log("🔄 Starting registration process...");
       console.log("Sending data:", formData);
       
+      // Prepare the data for the API
+      const apiData = {
+        name: formData.name,
+        gmail: formData.gmail,
+        number: formData.number || "", // Send empty string if no number
+        password: formData.password
+      };
+
+      console.log("📤 Sending to API:", apiData);
+
       const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(apiData)
       });
 
+      console.log("📥 Response status:", response.status);
+      console.log("📥 Response ok:", response.ok);
+
       const data = await response.json();
-      
-      console.log("API Response:", data);
+      console.log("📥 Full API Response:", data);
 
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        // Handle different types of error responses
+        if (data.errors) {
+          // If there are validation errors from the backend
+          const errorMessages = Object.values(data.errors).flat().join(', ');
+          throw new Error(errorMessages);
+        }
+        throw new Error(data.message || data.error || `Registration failed with status: ${response.status}`);
       }
 
       // Registration successful
       console.log("✅ Registration successful:", data);
       
       // Store user data in localStorage for immediate login
-      if (data.data && data.token) {
+      if (data.user || data.data) {
+        const userData = data.user || data.data;
         const userProfile = {
-          id: data.data._id,
-          name: data.data.name,
-          email: data.data.gmail, // Store as email for compatibility
-          gmail: data.data.gmail,
-          phone: data.data.number, // Store as phone for compatibility
-          number: data.data.number,
+          id: userData._id || userData.id,
+          name: userData.name,
+          email: userData.gmail || userData.email,
+          gmail: userData.gmail || userData.email,
+          phone: userData.number || userData.phone,
+          number: userData.number || userData.phone,
           joinDate: new Date().toISOString(),
           bookings: [],
-          createdAt: data.data.createdAt || new Date().toISOString()
+          createdAt: userData.createdAt || new Date().toISOString()
         };
 
         // Store all authentication data
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUser', JSON.stringify(userProfile));
         localStorage.setItem('userProfile', JSON.stringify(userProfile));
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authToken', data.token || data.accessToken);
         
         // Store in registeredUsers array for compatibility
         let allUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        // Remove existing user if any
+        allUsers = allUsers.filter(user => user.email !== userProfile.email);
         allUsers.push(userProfile);
         localStorage.setItem('registeredUsers', JSON.stringify(allUsers));
 
@@ -130,11 +151,38 @@ const Register = () => {
       
     } catch (error) {
       console.error("❌ Error during registration:", error);
-      setError(error.message || "Registration failed. Please try again.");
+      
+      // More specific error messages
+      if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+        setError("Network error: Unable to connect to server. Please check your internet connection.");
+      } else if (error.message.includes('email already exists') || error.message.includes('duplicate')) {
+        setError("This email is already registered. Please use a different email or try logging in.");
+      } else {
+        setError(error.message || "Registration failed. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  // Test API connection
+  const testAPIConnection = async () => {
+    try {
+      console.log("🔍 Testing API connection...");
+      const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/register/');
+      console.log("API Test Response:", response.status);
+      if (response.ok) {
+        console.log("✅ API is reachable");
+      } else {
+        console.log("❌ API returned error:", response.status);
+      }
+    } catch (error) {
+      console.error("❌ API connection test failed:", error);
+    }
+  };
+
+  // Uncomment the line below to test API connection on component mount
+  // React.useEffect(() => { testAPIConnection(); }, []);
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-cover object-cover" style={{backgroundImage: 'url("https://i.pinimg.com/736x/1e/f2/55/1ef255bcbb8a6af42634e88867b3e076.jpg")'}}>
@@ -142,18 +190,26 @@ const Register = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">Create Your Account</h1>
           <p className="text-gray-200 drop-shadow-md">Join us today and start your journey</p>
+          
+          {/* Debug button - remove in production */}
+          <button 
+            onClick={testAPIConnection}
+            className="mt-2 px-4 py-2 bg-gray-600 text-white rounded text-sm"
+          >
+            Test API Connection
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white/20 backdrop-blur-md shadow-2xl rounded-2xl border border-white/30 p-8 space-y-6">
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-              <strong>Error:</strong> {error}
+              <strong className="block">Error:</strong> {error}
             </div>
           )}
 
           {success && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-              <strong>Success:</strong> {success}
+              <strong className="block">Success:</strong> {success}
             </div>
           )}
 
