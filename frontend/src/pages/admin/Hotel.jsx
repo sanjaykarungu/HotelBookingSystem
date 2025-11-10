@@ -16,12 +16,12 @@ const Hotel = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [sortBy, setSortBy] = useState('name');
 
-  // All API endpoints
+  // All API endpoints - UPDATED to live server
   const API_ENDPOINTS = [
-    { url: 'https://hotel-booking-sigma-wine.vercel.app/api/world/all', name: 'world' },
-    { url: 'https://hotel-booking-sigma-wine.vercel.app/api/hotel/all', name: 'hotel' },
-    { url: 'https://hotel-booking-sigma-wine.vercel.app/api/property/all', name: 'property' },
-    { url: 'https://hotel-booking-sigma-wine.vercel.app/api/india/all', name: 'india' }
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/all', name: 'world' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/all', name: 'hotel' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/all', name: 'property' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/all', name: 'india' }
   ];
 
   // Enhanced function to extract hotels from any data structure
@@ -278,19 +278,19 @@ const Hotel = () => {
     setFilteredHotels(filtered);
   }, [hotels, searchTerm, selectedSource, selectedStatus, sortBy]);
 
-  // Delete hotel function - UPDATED
+  // Delete hotel function - UPDATED to live server
   const handleDeleteHotel = async (hotelId, hotelSource, stateId) => {
     if (!window.confirm('Are you sure you want to delete this hotel?')) {
       return;
     }
 
     try {
-      // Map hotel sources to their respective API endpoints
+      // Map hotel sources to their respective API endpoints - UPDATED to live server
       const apiEndpoints = {
-        hotel: `https://hotel-booking-sigma-wine.vercel.app/api/hotel/${hotelId}`,
-        world: `https://hotel-booking-sigma-wine.vercel.app/api/world/${hotelId}`,
-        property: `https://hotel-booking-sigma-wine.vercel.app/api/property/${hotelId}`,
-        india: stateId ? `https://hotel-booking-sigma-wine.vercel.app/api/india/${stateId}/hotels/${hotelId}` : null
+        hotel: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${hotelId}`,
+        world: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/${hotelId}`,
+        property: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/${hotelId}`,
+        india: stateId ? `https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/${stateId}/hotels/${hotelId}` : null
       };
 
       const deleteUrl = apiEndpoints[hotelSource];
@@ -316,17 +316,17 @@ const Hotel = () => {
     }
   };
 
-  // Toggle hotel status function - UPDATED
+  // Toggle hotel status function - UPDATED to live server
   const handleToggleStatus = async (hotelId, currentStatus, hotelSource, stateId) => {
     try {
       const newStatus = currentStatus === "active" ? "inactive" : "active";
       
-      // Map hotel sources to their respective API endpoints
+      // Map hotel sources to their respective API endpoints - UPDATED to live server
       const apiEndpoints = {
-        hotel: `https://hotel-booking-sigma-wine.vercel.app/api/hotel/${hotelId}`,
-        world: `https://hotel-booking-sigma-wine.vercel.app/api/world/${hotelId}`,
-        property: `https://hotel-booking-sigma-wine.vercel.app/api/property/${hotelId}`,
-        india: stateId ? `https://hotel-booking-sigma-wine.vercel.app/api/india/${stateId}/hotels/${hotelId}/status` : null
+        hotel: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${hotelId}`,
+        world: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/${hotelId}`,
+        property: `https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/${hotelId}`,
+        india: stateId ? `https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/${stateId}/hotels/${hotelId}/status` : null
       };
 
       const updateUrl = apiEndpoints[hotelSource];
