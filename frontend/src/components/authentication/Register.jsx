@@ -66,7 +66,7 @@ const Register = () => {
       console.log("🔄 Starting registration process...");
       console.log("Sending data:", formData);
       
-      const response = await fetch('https://hotel-booking-sigma-wine.vercel.app/api/register/', {
+      const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
