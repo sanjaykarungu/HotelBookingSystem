@@ -22,7 +22,7 @@ const EditHotel = () => {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/hotel/${id}`);
+        const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`);
         const data = await response.json();
         const hotelData = data.data || data;
         
@@ -51,7 +51,7 @@ const EditHotel = () => {
     setSaving(true);
 
     try {
-      const response = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/hotel/${id}`, {
+      const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
