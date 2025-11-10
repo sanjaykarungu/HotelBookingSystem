@@ -64,14 +64,15 @@ const Register = () => {
 
     try {
       console.log("🔄 Starting registration process...");
-      console.log("Sending data:", formData);
+      console.log("Form data:", formData);
       
-      // Prepare the data for the API
+      // Prepare the data for the API - INCLUDE confirm_password
       const apiData = {
         name: formData.name,
         gmail: formData.gmail,
         number: formData.number || "", // Send empty string if no number
-        password: formData.password
+        password: formData.password,
+        confirm_password: formData.confirm_password // Add this field
       };
 
       console.log("📤 Sending to API:", apiData);
@@ -157,6 +158,8 @@ const Register = () => {
         setError("Network error: Unable to connect to server. Please check your internet connection.");
       } else if (error.message.includes('email already exists') || error.message.includes('duplicate')) {
         setError("This email is already registered. Please use a different email or try logging in.");
+      } else if (error.message.includes('confirm_password')) {
+        setError("Please confirm your password by entering it in both password fields.");
       } else {
         setError(error.message || "Registration failed. Please try again.");
       }
@@ -173,16 +176,16 @@ const Register = () => {
       console.log("API Test Response:", response.status);
       if (response.ok) {
         console.log("✅ API is reachable");
+        alert("API is reachable! Status: " + response.status);
       } else {
         console.log("❌ API returned error:", response.status);
+        alert("API error. Status: " + response.status);
       }
     } catch (error) {
       console.error("❌ API connection test failed:", error);
+      alert("API connection failed: " + error.message);
     }
   };
-
-  // Uncomment the line below to test API connection on component mount
-  // React.useEffect(() => { testAPIConnection(); }, []);
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-cover object-cover" style={{backgroundImage: 'url("https://i.pinimg.com/736x/1e/f2/55/1ef255bcbb8a6af42634e88867b3e076.jpg")'}}>
@@ -194,7 +197,7 @@ const Register = () => {
           {/* Debug button - remove in production */}
           <button 
             onClick={testAPIConnection}
-            className="mt-2 px-4 py-2 bg-gray-600 text-white rounded text-sm"
+            className="mt-2 px-4 py-2 bg-gray-600 text-white rounded text-sm hover:bg-gray-700 transition-colors"
           >
             Test API Connection
           </button>
