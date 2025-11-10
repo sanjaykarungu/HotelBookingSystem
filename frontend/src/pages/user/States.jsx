@@ -15,17 +15,15 @@ const States = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("🔍 Testing backend connection for States component...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
         
         if (!testResponse.ok) {
           throw new Error(`Backend test failed with status: ${testResponse.status}`);
         }
         
-        const testData = await testResponse.json();
-        console.log("✅ Backend connection successful:", testData);
+        await testResponse.json();
       } catch (testError) {
-        console.error("❌ Backend connection test failed:", testError);
+        console.error("Backend connection test failed:", testError);
       }
     };
     
@@ -38,7 +36,6 @@ const States = () => {
       try {
         setLoading(true);
         setError(null);
-        console.log(`🔄 Fetching state data for ID: ${id}`);
         
         const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/${id}`, {
           method: 'GET',
@@ -48,30 +45,22 @@ const States = () => {
           },
         });
         
-        console.log("📡 Response status:", response.status);
-        console.log("📡 Response ok:", response.ok);
-        
         if (!response.ok) {
           const errorText = await response.text();
-          console.error("❌ Response error text:", errorText);
-          throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log("📦 Full API response:", data);
         
         // Handle different response formats
         let stateData = null;
         let hotelsData = [];
         
         if (data.data) {
-          console.log("✅ State data found in data.data");
           stateData = data.data;
         } else if (data) {
-          console.log("✅ State data found directly");
           stateData = data;
         } else {
-          console.warn("⚠️ Unexpected data format:", data);
           throw new Error('Invalid state data format from API');
         }
         
@@ -79,19 +68,15 @@ const States = () => {
         
         // Extract hotels data - handle different possible structures
         if (stateData.hotels && Array.isArray(stateData.hotels)) {
-          console.log(`✅ Hotels found in state.hotels: ${stateData.hotels.length} items`);
           hotelsData = stateData.hotels;
         } else if (stateData.properties && Array.isArray(stateData.properties)) {
-          console.log(`✅ Hotels found in state.properties: ${stateData.properties.length} items`);
           hotelsData = stateData.properties;
         } else {
           // Try to find hotels by state name
           const stateName = stateData.state ? stateData.state.toLowerCase().replace(' ', '') : '';
           if (stateName && stateData[stateName] && Array.isArray(stateData[stateName])) {
-            console.log(`✅ Hotels found in state.${stateName}: ${stateData[stateName].length} items`);
             hotelsData = stateData[stateName];
           } else {
-            console.log("ℹ️ No hotels array found in state data");
             hotelsData = [];
           }
         }
@@ -99,11 +84,6 @@ const States = () => {
         setStateHotels(hotelsData);
         
       } catch (err) {
-        console.error('❌ Error fetching state:', err);
-        console.error('🔍 Error details:', {
-          message: err.message,
-          name: err.name,
-        });
         setError('Failed to load state details: ' + err.message);
       } finally {
         setLoading(false);
@@ -153,7 +133,6 @@ const States = () => {
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
     
-    console.log('🛒 Added to cart:', cartItem);
     alert(`${hotel.name || 'Hotel'} added to cart successfully!`);
   }
 
@@ -161,7 +140,6 @@ const States = () => {
   const handleHotelClick = (hotel, e) => {
     e.stopPropagation();
     const hotelId = hotel._id || hotel.id;
-    console.log("🔗 Navigating to hotel:", hotelId);
     navigate(`/states/${id}/hotels/${hotelId}`);
   }
 
@@ -230,16 +208,9 @@ const States = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center p-8 max-w-md">
           <div className="bg-red-50 border border-red-200 rounded-xl p-8">
-            <div className="text-red-600 text-4xl mb-4">⚠️</div>
             <h3 className="text-red-800 text-xl font-bold mb-3">
               Failed to Load State
             </h3>
-            <p className="text-red-600 text-base mb-4">
-              {error}
-            </p>
-            <p className="text-gray-600 text-sm mb-6">
-              Please check if the backend server is running and try again.
-            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button 
                 onClick={() => window.location.reload()} 
@@ -265,9 +236,7 @@ const States = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center p-8">
-          <div className="text-gray-400 text-6xl mb-4">🏞️</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-4">State Not Found</h1>
-          <p className="text-gray-600 text-lg mb-6">The state you're looking for doesn't exist.</p>
           <button 
             onClick={() => navigate('/')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
@@ -282,13 +251,6 @@ const States = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-5 py-10">
-        {/* Debug Info */}
-        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-blue-700 text-sm">
-            ✅ State data loaded successfully | ID: {id} | State: {state.state || state.name} | Hotels: {stateHotels.length}
-          </p>
-        </div>
-
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
@@ -349,9 +311,6 @@ const States = () => {
               <h2 className="font-bold text-gray-900 text-3xl md:text-4xl mb-4">
                 Premium Hotels in {state.state || state.name}
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Handpicked accommodations offering exceptional comfort and authentic {state.state || state.name} experiences
-              </p>
             </div>
             
             {/* List View Container */}
@@ -460,13 +419,9 @@ const States = () => {
           </div>
         ) : (
           <div className="text-center py-16 bg-white rounded-3xl shadow-lg border border-gray-200">
-            <div className="text-6xl mb-4">🏨</div>
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               Hotels Coming Soon to {state.state || state.name}
             </h3>
-            <p className="text-gray-600 text-lg max-w-md mx-auto mb-6">
-              We're working on bringing you the best accommodations in {state.state || state.name}. Check back soon for amazing hotel options!
-            </p>
             <button 
               onClick={() => navigate('/')}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200"
