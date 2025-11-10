@@ -69,7 +69,7 @@ const Profile = () => {
 
       console.log('🔄 Updating profile with data:', updateData);
 
-      const response = await fetch(`http://localhost:3000/api/register/${currentUser._id}`, {
+      const response = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/register/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
