@@ -13,7 +13,7 @@ const Feature = () => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch('https://hotel-booking-backend-fyj5.onrender.com/api/hotel/all');      
+      const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/all');      
       if (!response.ok) {
         throw new Error(`Failed to fetch properties`);
       }
