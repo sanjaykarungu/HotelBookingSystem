@@ -1,0 +1,743 @@
+[
+  {
+    "id": 1,
+    "state": "Goa",
+    "image_url": "https://i.pinimg.com/736x/a1/47/4f/a1474f75337f01d16565ee759c6381af.jpg",
+    "description": "Famous for beaches, nightlife, and Portuguese heritage",
+    "goa": [
+      {
+        "id": 1,
+        "name": "Taj Fort Aguada Resort & Spa",
+        "image_url": "https://i.pinimg.com/736x/0e/56/4d/0e564d7b7ac34aa240fea453a3c45e18.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/ab/39/43/ab39439bfa2e720b6ea227e5fb083738.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/6d/35/fa/6d35fa214220301bf79a60c657571060.jpg",
+        "price": 15000,
+        "rating": 4.7,
+        "address": "Sinquerim Beach, Bardez, Goa 403515",
+        "description": "Luxurious beachfront resort with historic Portuguese fort, multiple pools, and world-class spa facilities."
+      },
+      {
+        "id": 2,
+        "name": "The Leela Goa",
+        "image_url": "https://i.pinimg.com/736x/06/20/2f/06202fc6c71254d4596fea1dceb8933f.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/9f/bf/e5/9fbfe51a83882c19f3f4388ad9d0e068.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "price": 12000,
+        "rating": 4.6,
+        "address": "Cavelossim, Salcette, Goa 403731",
+        "description": "5-star luxury resort spread over 75 acres with private beach, lagoon, and award-winning dining."
+      },
+      {
+        "id": 3,
+        "name": "W Goa",
+        "image_url": "https://i.pinimg.com/1200x/a2/dd/df/a2dddf15c4ae2df6f300051b4dbbae0f.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/33/59/19/33591976ca0b44a9ceb1f161b4cc4c0a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c1/eb/1a/c1eb1aff61acd097811e6384f2013850.jpg",
+        "price": 18000,
+        "rating": 4.8,
+        "address": "Vagator Beach, Bardez, Goa 403509",
+        "description": "Trendy boutique hotel with vibrant nightlife, chic design, and stunning cliff-top views of Vagator Beach."
+      },
+      {
+        "id": 4,
+        "name": "Park Hyatt Goa Resort and Spa",
+        "image_url": "https://i.pinimg.com/1200x/c1/eb/1a/c1eb1aff61acd097811e6384f2013850.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/a2/dd/df/a2dddf15c4ae2df6f300051b4dbbae0f.jpg",
+        "price": 14000,
+        "rating": 4.5,
+        "address": "Arossim Beach, Cansaulim, Goa 403712",
+        "description": "Portuguese-inspired luxury resort with private pool villas, championship golf course, and Ayurvedic spa."
+      },
+      {
+        "id": 5,
+        "name": "Alila Diwa Goa",
+        "image_url": "https://i.pinimg.com/736x/b8/66/b7/b866b73e9e41cb4971f34a7f3381f1fe.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c1/eb/1a/c1eb1aff61acd097811e6384f2013850.jpg",
+        "price": 11000,
+        "rating": 4.4,
+        "address": "48/10, Adao Waddo, Majorda, Salcette, Goa 403713",
+        "description": "Contemporary luxury resort with infinity pools, paddy field views, and authentic Goan architecture."
+      },
+      {
+        "id": 6,
+        "name": "Novotel Goa Resort & Spa",
+        "image_url": "https://i.pinimg.com/736x/43/7c/48/437c487bb43a66ce15139b31ccb9e254.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/33/59/19/33591976ca0b44a9ceb1f161b4cc4c0a.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/b8/66/b7/b866b73e9e41cb4971f34a7f3381f1fe.jpg",
+        "price": 8500,
+        "rating": 4.3,
+        "address": "Candolim Beach, Bardez, Goa 403515",
+        "description": "Modern beachfront resort with multiple dining options, spa, and family-friendly activities."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "state": "Tamil Nadu",
+    "image_url": "https://i.pinimg.com/1200x/0e/2e/7a/0e2e7a2adca6a4444bdd04ffb35a86b0.jpg",
+    "description": "Famous for Dravidian temples, classical dance, and coastal areas",
+    "tamilnadu": [
+      {
+        "id": 1,
+        "name": "Taj Coromandel Chennai",
+        "image_url": "https://i.pinimg.com/736x/23/9c/c1/239cc1a3df97f8ae7b002287d44abcee.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/43/7c/48/437c487bb43a66ce15139b31ccb9e254.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "price": 12000,
+        "rating": 4.7,
+        "address": "37, Mahatma Gandhi Road, Nungambakkam, Chennai, Tamil Nadu 600034",
+        "description": "Luxury 5-star hotel in Chennai offering elegant rooms, fine dining restaurants, and premium business facilities with traditional Tamil hospitality."
+      },
+      {
+        "id": 2,
+        "name": "ITC Grand Chola Chennai",
+        "image_url": "https://i.pinimg.com/1200x/7d/11/b1/7d11b1404a90e34231bda3514ffeaf25.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/23/9c/c1/239cc1a3df97f8ae7b002287d44abcee.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/93/59/a5/9359a5accdaa25827984e3ffcdb51a56.jpg",
+        "price": 15000,
+        "rating": 4.8,
+        "address": "63, Mount Road, Guindy, Chennai, Tamil Nadu 600032",
+        "description": "Grand luxury hotel inspired by the magnificent Chola dynasty architecture, featuring world-class amenities and exquisite dining experiences."
+      },
+      {
+        "id": 3,
+        "name": "The Leela Palace Chennai",
+        "image_url": "https://i.pinimg.com/1200x/93/59/a5/9359a5accdaa25827984e3ffcdb51a56.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/23/9c/c1/239cc1a3df97f8ae7b002287d44abcee.jpg",
+        "price": 14000,
+        "rating": 4.6,
+        "address": "Adyar Sea Face, Chennai, Tamil Nadu 600020",
+        "description": "Beachfront luxury palace hotel offering stunning sea views, royal treatment, and authentic South Indian cultural experiences."
+      },
+      {
+        "id": 4,
+        "name": "Hyatt Regency Chennai",
+        "image_url": "https://i.pinimg.com/1200x/2a/91/5e/2a915e2f0d2ad2a3b3aa0b0aeb981c06.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/7d/11/b1/7d11b1404a90e34231bda3514ffeaf25.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c4/38/a2/c438a2ab00b7124cf2ddbdb77c7b7a1c.jpg",
+        "price": 9000,
+        "rating": 4.5,
+        "address": "365, Anna Salai, Teynampet, Chennai, Tamil Nadu 600018",
+        "description": "Contemporary luxury hotel in the heart of Chennai with modern amenities, rooftop pool, and multiple dining options."
+      },
+      {
+        "id": 5,
+        "name": "Radisson Blu Hotel Temple Bay Mamallapuram",
+        "image_url": "https://i.pinimg.com/1200x/c4/38/a2/c438a2ab00b7124cf2ddbdb77c7b7a1c.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/2a/91/5e/2a915e2f0d2ad2a3b3aa0b0aeb981c06.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/29/93/70/2993703f173621953f16c0c59fe72f11.jpg",
+        "price": 8000,
+        "rating": 4.4,
+        "address": "57, Kovalam Road, Mahabalipuram, Tamil Nadu 603104",
+        "description": "Beach resort near UNESCO World Heritage sites with traditional architecture, spa services, and cultural performances."
+      },
+      {
+        "id": 6,
+        "name": "Taj Fisherman's Cove Resort & Spa",
+        "image_url": "https://i.pinimg.com/736x/22/e2/fb/22e2fb8f39fe5546fb8d6e88539dfd18.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/c4/38/a2/c438a2ab00b7124cf2ddbdb77c7b7a1c.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/7d/11/b1/7d11b1404a90e34231bda3514ffeaf25.jpg",
+        "price": 11000,
+        "rating": 4.6,
+        "address": "Covelong Beach, Kanchipuram District, Tamil Nadu 603112",
+        "description": "Seafront resort offering colonial-style accommodations, private beach access, and authentic Chettinad cuisine experiences."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "state": "Kerala",
+    "image_url": "https://i.pinimg.com/736x/d3/ea/61/d3ea61bca2af8dfba72768bfe49da6e3.jpg",
+    "description": "Known for backwaters, ayurvedic treatments, and hill stations",
+    "kerala": [
+      {
+        "id": 1,
+        "name": "Kumarakom Lake Resort",
+        "image_url": "https://i.pinimg.com/736x/a5/fe/aa/a5feaa614ff4f05bce51111358f9cb34.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/22/e2/fb/22e2fb8f39fe5546fb8d6e88539dfd18.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/68/d2/8c/68d28c1c519336246016d2e152e36a3d.jpg",
+        "price": 13000,
+        "rating": 4.7,
+        "address": "Kumarakom, Kottayam, Kerala 686563",
+        "description": "Luxury backwater resort with traditional Kerala architecture, houseboat experiences, and Ayurvedic spa treatments."
+      },
+      {
+        "id": 2,
+        "name": "Taj Bekal Resort & Spa",
+        "image_url": "https://i.pinimg.com/736x/68/d2/8c/68d28c1c519336246016d2e152e36a3d.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a5/fe/aa/a5feaa614ff4f05bce51111358f9cb34.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/22/e2/fb/22e2fb8f39fe5546fb8d6e88539dfd18.jpg",
+        "price": 14500,
+        "rating": 4.6,
+        "address": "Kappil Beach, Bekal, Kasaragod, Kerala 671316",
+        "description": "Beachfront luxury resort featuring backwater views, traditional treatments, and cultural performances."
+      },
+      {
+        "id": 3,
+        "name": "Brunton Boatyard Hotel",
+        "image_url": "https://i.pinimg.com/736x/24/4a/2e/244a2e03a2836ef80bd6c85a84ece24e.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/68/d2/8c/68d28c1c519336246016d2e152e36a3d.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a5/fe/aa/a5feaa614ff4f05bce51111358f9cb34.jpg",
+        "price": 12000,
+        "rating": 4.5,
+        "address": "Calicut, Kerala 673032",
+        "description": "Historic waterfront hotel showcasing colonial architecture with modern amenities and spice route heritage."
+      },
+      {
+        "id": 4,
+        "name": "The Raviz Kadappuram",
+        "image_url": "https://i.pinimg.com/1200x/9e/2a/a9/9e2aa97ef6dc7c25191e11a443616bc3.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/24/4a/2e/244a2e03a2836ef80bd6c85a84ece24e.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/d7/8a/32/d78a32e982a8f25ab80d7da5c792e6b1.jpg",
+        "price": 8500,
+        "rating": 4.4,
+        "address": "Kadappuram Beach, Kozhikode, Kerala 673528",
+        "description": "Beach resort offering Ayurvedic wellness programs, seafood cuisine, and traditional Kathakali performances."
+      },
+      {
+        "id": 5,
+        "name": "Green Lagoon Resort",
+        "image_url": "https://i.pinimg.com/1200x/d7/8a/32/d78a32e982a8f25ab80d7da5c792e6b1.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/9e/2a/a9/9e2aa97ef6dc7c25191e11a443616bc3.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/24/4a/2e/244a2e03a2836ef80bd6c85a84ece24e.jpg",
+        "price": 9500,
+        "rating": 4.3,
+        "address": "Alleppey Backwaters, Alappuzha, Kerala 688009",
+        "description": "Backwater resort with houseboat stays, traditional fishing experiences, and Kerala martial art demonstrations."
+      },
+      {
+        "id": 6,
+        "name": "Windermere Estate",
+        "image_url": "https://i.pinimg.com/1200x/f0/74/ff/f074ffd76cd7b0f41b5f0d9e9aec0fe1.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/d7/8a/32/d78a32e982a8f25ab80d7da5c792e6b1.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/9e/2a/a9/9e2aa97ef6dc7c25191e11a443616bc3.jpg",
+        "price": 11000,
+        "rating": 4.5,
+        "address": "Pampadampara, Munnar, Kerala 685612",
+        "description": "Plantation estate resort in tea gardens offering mountain views, trekking, and spice plantation tours."
+      }
+    ]
+  },
+
+  {
+    "id": 4,
+    "state": "Himachal Pradesh",
+    "image_url": "https://i.pinimg.com/1200x/1f/c1/0e/1fc10efd7644abcb70fab2cac0f21e31.jpg",
+    "description": "Popular for Himalayan trekking, hill stations, and adventure sports",
+    "himachalpradesh": [
+      {
+        "id": 1,
+        "name": "Oberoi Cecil Shimla",
+        "image_url": "https://i.pinimg.com/1200x/12/f8/f9/12f8f9a9ccaf3744338860108f2f6085.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/f0/74/ff/f074ffd76cd7b0f41b5f0d9e9aec0fe1.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/22/e6/31/22e6311a103287c1dc4e7efeee5fb105.jpg",
+        "price": 20000,
+        "rating": 4.8,
+        "address": "Chaura Maidan, Shimla, Himachal Pradesh 171004",
+        "description": "Heritage hotel from British era with mountain views, oak wood interiors, and colonial charm."
+      },
+      {
+        "id": 2,
+        "name": "Wildflower Hall Shimla",
+        "image_url": "https://i.pinimg.com/1200x/22/e6/31/22e6311a103287c1dc4e7efeee5fb105.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/12/f8/f9/12f8f9a9ccaf3744338860108f2f6085.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/f0/74/ff/f074ffd76cd7b0f41b5f0d9e9aec0fe1.jpg",
+        "price": 32000,
+        "rating": 4.9,
+        "address": "Chharabra, Shimla, Himachal Pradesh 171012",
+        "description": "Luxury mountain resort with spa, adventure activities, and panoramic Himalayan views."
+      },
+      {
+        "id": 3,
+        "name": "Span Resort & Spa Manali",
+        "image_url": "https://i.pinimg.com/736x/f0/12/4a/f0124a2922894c9658c3c956847dcc4f.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/22/e6/31/22e6311a103287c1dc4e7efeee5fb105.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/12/f8/f9/12f8f9a9ccaf3744338860108f2f6085.jpg",
+        "price": 15000,
+        "rating": 4.6,
+        "address": "Kullu Valley, Manali, Himachal Pradesh 175131",
+        "description": "Riverside resort offering apple orchard views, adventure sports, and cultural performances."
+      },
+      {
+        "id": 4,
+        "name": "Snow Valley Resorts Manali",
+        "image_url": "https://i.pinimg.com/1200x/c3/71/e0/c371e0a97d0f8209261e6b59d65ec931.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/f0/12/4a/f0124a2922894c9658c3c956847dcc4f.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "price": 12000,
+        "rating": 4.5,
+        "address": "Log Huts Area, Manali, Himachal Pradesh 175131",
+        "description": "Mountain resort with cedar wood cottages, skiing facilities, and trekking expeditions."
+      },
+      {
+        "id": 5,
+        "name": "The Himalayan Dharamshala",
+        "image_url": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/c3/71/e0/c371e0a97d0f8209261e6b59d65ec931.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/12/4a/f0124a2922894c9658c3c956847dcc4f.jpg",
+        "price": 13000,
+        "rating": 4.6,
+        "address": "Dharamshala, Himachal Pradesh 176215",
+        "description": "Resort near Tibetan monasteries offering meditation sessions and mountain trekking."
+      },
+      {
+        "id": 6,
+        "name": "Toshali Resort Kasauli",
+        "image_url": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c3/71/e0/c371e0a97d0f8209261e6b59d65ec931.jpg",
+        "price": 11000,
+        "rating": 4.4,
+        "address": "Kasauli, Himachal Pradesh 173204",
+        "description": "Hill station resort with colonial architecture, nature walks, and heritage trails."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "state": "Rajasthan",
+    "image_url": "https://i.pinimg.com/736x/bb/14/be/bb14be40be2c68bd959490d4e483e9f9.jpg",
+    "description": "Land of palaces, forts, and desert landscapes",
+    "rajasthan": [
+      {
+        "id": 1,
+        "name": "Taj Lake Palace Udaipur",
+        "image_url": "https://i.pinimg.com/736x/c4/01/53/c40153604a53696fee7d0a1fcd6f4128.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/c2/0e/c5/c20ec5f6f761cf8aa9dbbe9a05b9081a.jpg",
+        "price": 35000,
+        "rating": 4.9,
+        "address": "Pichola Lake, Udaipur, Rajasthan 313001",
+        "description": "Iconic white marble palace floating on Lake Pichola, offering royal treatment and cultural performances."
+      },
+      {
+        "id": 2,
+        "name": "Rambagh Palace Jaipur",
+        "image_url": "https://i.pinimg.com/736x/c2/0e/c5/c20ec5f6f761cf8aa9dbbe9a05b9081a.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/c4/01/53/c40153604a53696fee7d0a1fcd6f4128.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/c0/cd/9b/c0cd9b88b2cfa9b1fcd0962758d56e9a.jpg",
+        "price": 28000,
+        "rating": 4.8,
+        "address": "Bhawani Singh Road, Jaipur, Rajasthan 302005",
+        "description": "Former royal residence transformed into luxury hotel with polo grounds and traditional Rajasthani cuisine."
+      },
+      {
+        "id": 3,
+        "name": "Umaid Bhawan Palace Jodhpur",
+        "image_url": "https://i.pinimg.com/736x/11/15/ee/1115ee70b8c301c7fdf4d8b4a4681ea9.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/c2/0e/c5/c20ec5f6f761cf8aa9dbbe9a05b9081a.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/c4/01/53/c40153604a53696fee7d0a1fcd6f4128.jpg",
+        "price": 42000,
+        "rating": 4.9,
+        "address": "Circuit House Road, Jodhpur, Rajasthan 342006",
+        "description": "One of the world's largest private residences with art deco style and museum showcasing royal history."
+      },
+      {
+        "id": 4,
+        "name": "The Oberoi Udaivilas Udaipur",
+        "image_url": "https://i.pinimg.com/736x/8c/76/67/8c766749cba3a581d6476f8d75f42400.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/11/15/ee/1115ee70b8c301c7fdf4d8b4a4681ea9.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/05/eb/86/05eb8609168f2d73edd72b6d68f660b9.jpg",
+        "price": 38000,
+        "rating": 4.8,
+        "address": "Haridasji Ki Magri, Udaipur, Rajasthan 313001",
+        "description": "Palace hotel with intricate mosaics, private pools, and boat rides to City Palace."
+      },
+      {
+        "id": 5,
+        "name": "Sujan Sher Bagh Ranthambore",
+        "image_url": "https://i.pinimg.com/736x/05/eb/86/05eb8609168f2d73edd72b6d68f660b9.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/8c/76/67/8c766749cba3a581d6476f8d75f42400.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/11/15/ee/1115ee70b8c301c7fdf4d8b4a4681ea9.jpg",
+        "price": 45000,
+        "rating": 4.7,
+        "address": "Ranthambore Road, Sawai Madhopur, Rajasthan 322001",
+        "description": "Luxury tented camp near tiger reserve offering safari experiences and conservation programs."
+      },
+      {
+        "id": 6,
+        "name": "Fort Chanwa Luni",
+        "image_url": "https://i.pinimg.com/736x/9f/d9/ba/9fd9baabba91bb0bb7ad11bbcb007668.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/05/eb/86/05eb8609168f2d73edd72b6d68f660b9.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/8c/76/67/8c766749cba3a581d6476f8d75f42400.jpg",
+        "price": 12000,
+        "rating": 4.5,
+        "address": "Luni, Jodhpur, Rajasthan 342008",
+        "description": "17th century fort converted into heritage hotel with traditional architecture and desert activities."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "state": "Uttarakhand",
+    "image_url": "https://i.pinimg.com/736x/e5/77/47/e5774739612203ab117e112504b41e91.jpg",
+    "description": "Known as Devbhoomi, famous for Char Dham pilgrimage and hill stations",
+    "uttarakhand": [
+      {
+        "id": 1,
+        "name": "Taj Rishikesh Resort & Spa",
+        "image_url": "https://i.pinimg.com/1200x/92/05/34/920534468eea87bf96069ad79564bdac.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/db/e5/76/dbe5760d3802400ab0b77db77086458a.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/1f/de/5a/1fde5afab8cf6eecb49fdd6cbef9ebee.jpg",
+        "price": 18000,
+        "rating": 4.7,
+        "address": "Singtali, Rishikesh, Uttarakhand 249201",
+        "description": "Luxury riverside resort offering yoga sessions, meditation, and adventure activities in Himalayan foothills."
+      },
+      {
+        "id": 2,
+        "name": "The Naini Retreat Nainital",
+        "image_url": "https://i.pinimg.com/736x/1f/de/5a/1fde5afab8cf6eecb49fdd6cbef9ebee.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/92/05/34/920534468eea87bf96069ad79564bdac.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/db/e5/76/dbe5760d3802400ab0b77db77086458a.jpg",
+        "price": 12500,
+        "rating": 4.6,
+        "address": "Mallital, Nainital, Uttarakhand 263001",
+        "description": "British-era heritage bungalow with lake views, nature walks, and colonial charm."
+      },
+      {
+        "id": 3,
+        "name": "JW Marriott Mussoorie Walnut Grove",
+        "image_url": "https://i.pinimg.com/736x/db/e5/76/dbe5760d3802400ab0b77db77086458a.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/1f/de/5a/1fde5afab8cf6eecb49fdd6cbef9ebee.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/92/05/34/920534468eea87bf96069ad79564bdac.jpg",
+        "price": 16000,
+        "rating": 4.8,
+        "address": "Kempty Fall Road, Mussoorie, Uttarakhand 248179",
+        "description": "Luxury resort in queen of hills offering mountain views, spa treatments, and trekking expeditions."
+      },
+      {
+        "id": 4,
+        "name": "Aloha On The Ganges Rishikesh",
+        "image_url": "https://i.pinimg.com/736x/df/be/b7/dfbeb7bff241de14f0e1d3542edec2e6.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/66/0b/c1/660bc112b11a620fc847c665508c6bba.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/95/f0/86/95f086d747ef9182ae938f36f4af6084.jpg",
+        "price": 8500,
+        "rating": 4.4,
+        "address": "Marine Drive, Rishikesh, Uttarakhand 249201",
+        "description": "Riverside retreat specializing in yoga teacher training and spiritual wellness programs."
+      },
+      {
+        "id": 5,
+        "name": "The Chardham Camp",
+        "image_url": "https://i.pinimg.com/736x/95/f0/86/95f086d747ef9182ae938f36f4af6084.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/df/be/b7/dfbeb7bff241de14f0e1d3542edec2e6.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/66/0b/c1/660bc112b11a620fc847c665508c6bba.jpg",
+        "price": 9500,
+        "rating": 4.3,
+        "address": "Guptkashi, Rudraprayag, Uttarakhand 246439",
+        "description": "Luxury camping experience for pilgrims with modern amenities and spiritual guidance services."
+      },
+      {
+        "id": 6,
+        "name": "Mountain Club Resort",
+        "image_url": "https://i.pinimg.com/1200x/66/0b/c1/660bc112b11a620fc847c665508c6bba.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/95/f0/86/95f086d747ef9182ae938f36f4af6084.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/df/be/b7/dfbeb7bff241de14f0e1d3542edec2e6.jpg",
+        "price": 11000,
+        "rating": 4.5,
+        "address": "Auli, Joshimath, Uttarakhand 246443",
+        "description": "Ski resort with cable car access, winter sports, and panoramic Himalayan views."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "state": "Maharashtra",
+    "image_url": "https://i.pinimg.com/1200x/20/52/66/20526632e7e38d1a13aaab6114d8b36d.jpg",
+    "description": "Home to Mumbai, Ajanta-Ellora caves, and hill stations",
+    "maharashtra": [
+      {
+        "id": 1,
+        "name": "Taj Mahal Palace Mumbai",
+        "image_url": "https://i.pinimg.com/1200x/82/02/c5/8202c523bc3d9edbbafd3bca08a911d5.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/db/60/9c/db609c59dc287f0598c009d21272a278.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/43/42/52/43425205a5e2518b28d043af2bd7933a.jpg",
+        "price": 25000,
+        "rating": 4.9,
+        "address": "Apollo Bunder, Mumbai, Maharashtra 400001",
+        "description": "Iconic luxury hotel overlooking Gateway of India, featuring heritage architecture and world-class dining."
+      },
+      {
+        "id": 2,
+        "name": "The Oberoi Mumbai",
+        "image_url": "https://i.pinimg.com/736x/43/42/52/43425205a5e2518b28d043af2bd7933a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/82/02/c5/8202c523bc3d9edbbafd3bca08a911d5.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/db/60/9c/db609c59dc287f0598c009d21272a278.jpg",
+        "price": 22000,
+        "rating": 4.8,
+        "address": "Nariman Point, Mumbai, Maharashtra 400021",
+        "description": "Seafront luxury hotel with panoramic ocean views and award-winning spa services."
+      },
+      {
+        "id": 3,
+        "name": "St. Regis Mumbai",
+        "image_url": "https://i.pinimg.com/1200x/db/60/9c/db609c59dc287f0598c009d21272a278.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/43/42/52/43425205a5e2518b28d043af2bd7933a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/82/02/c5/8202c523bc3d9edbbafd3bca08a911d5.jpg",
+        "price": 28000,
+        "rating": 4.8,
+        "address": "Lower Parel, Mumbai, Maharashtra 400013",
+        "description": "Luxury skyscraper hotel with butler service and contemporary art collection."
+      },
+      {
+        "id": 4,
+        "name": "The Machan Resort Lonavala",
+        "image_url": "https://i.pinimg.com/736x/a7/88/25/a78825d256ef1a33e6540fea539d5a6a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/03/da/5d/03da5d991a9bcfc3007a6205832c02f8.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/95/cf/82/95cf82bdcec0c8fc4025e7cc04fc7168.jpg",
+        "price": 15000,
+        "rating": 4.6,
+        "address": "Lonavala, Maharashtra 410401",
+        "description": "Treehouse resort in Western Ghats offering nature immersion and adventure activities."
+      },
+      {
+        "id": 5,
+        "name": "Ramee Guestline Hotel Pune",
+        "image_url": "https://i.pinimg.com/1200x/95/cf/82/95cf82bdcec0c8fc4025e7cc04fc7168.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a7/88/25/a78825d256ef1a33e6540fea539d5a6a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/03/da/5d/03da5d991a9bcfc3007a6205832c02f8.jpg",
+        "price": 9000,
+        "rating": 4.4,
+        "address": "Koregaon Park, Pune, Maharashtra 411001",
+        "description": "Business luxury hotel in IT hub with modern amenities and conference facilities."
+      },
+      {
+        "id": 6,
+        "name": "The Dukes Retreat Mahabaleshwar",
+        "image_url": "https://i.pinimg.com/1200x/03/da/5d/03da5d991a9bcfc3007a6205832c02f8.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/95/cf/82/95cf82bdcec0c8fc4025e7cc04fc7168.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a7/88/25/a78825d256ef1a33e6540fea539d5a6a.jpg",
+        "price": 12000,
+        "rating": 4.5,
+        "address": "Mahabaleshwar, Maharashtra 412806",
+        "description": "Hill station resort with strawberry farms, valley views, and colonial architecture."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "state": "Karnataka",
+    "image_url": "https://i.pinimg.com/1200x/7b/bd/08/7bbd08d2d02a27cd11b66a120889482b.jpg",
+    "description": "Famous for Hampi ruins, Mysore Palace, and IT capital Bangalore",
+    "karnataka": [
+      {
+        "id": 1,
+        "name": "The Oberoi Bengaluru",
+        "image_url": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/82/02/c5/8202c523bc3d9edbbafd3bca08a911d5.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/66/e2/8b/66e28b08d60f9248317aa47172125de2.jpg",
+        "price": 18000,
+        "rating": 4.8,
+        "address": "37-38, MG Road, Bengaluru, Karnataka 560001",
+        "description": "Luxury urban resort in IT capital with tropical gardens and premium business facilities."
+      },
+      {
+        "id": 2,
+        "name": "Taj West End Bengaluru",
+        "image_url": "https://i.pinimg.com/1200x/66/e2/8b/66e28b08d60f9248317aa47172125de2.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/82/02/c5/8202c523bc3d9edbbafd3bca08a911d5.jpg",
+        "price": 16000,
+        "rating": 4.7,
+        "address": "Race Course Road, Bengaluru, Karnataka 560001",
+        "description": "Heritage hotel spread over 20 acres of gardens with colonial charm and modern luxury."
+      },
+      {
+        "id": 3,
+        "name": "Grand Mercure Mysore",
+        "image_url": "https://i.pinimg.com/1200x/1e/fe/f2/1efef20d909acde0d93666b8b4ccdba2.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/66/e2/8b/66e28b08d60f9248317aa47172125de2.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "price": 11000,
+        "rating": 4.6,
+        "address": "1-2, Jhansi Lakshmi Bai Road, Mysore, Karnataka 570005",
+        "description": "Royal heritage hotel near Mysore Palace offering cultural shows and traditional cuisine."
+      },
+      {
+        "id": 4,
+        "name": "Evolve Back Kamalapura Palace Hampi",
+        "image_url": "https://i.pinimg.com/1200x/aa/9f/a0/aa9fa0c1b17599543745a9b11df818e4.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/1e/fe/f2/1efef20d909acde0d93666b8b4ccdba2.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/66/e2/8b/66e28b08d60f9248317aa47172125de2.jpg",
+        "price": 22000,
+        "rating": 4.8,
+        "address": "Kamalapura, Hampi, Karnataka 583221",
+        "description": "Luxury resort near UNESCO World Heritage site with pool villas and guided heritage tours."
+      },
+      {
+        "id": 5,
+        "name": "Taj Madikeri Resort & Spa Coorg",
+        "image_url": "https://i.pinimg.com/736x/a0/4a/a3/a04aa347e48996997aec9e947ba1e9e5.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/aa/9f/a0/aa9fa0c1b17599543745a9b11df818e4.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/1e/fe/f2/1efef20d909acde0d93666b8b4ccdba2.jpg",
+        "price": 19000,
+        "rating": 4.7,
+        "address": "Coorg, Karnataka 571201",
+        "description": "Plantation resort in coffee estates with spice tours and adventure activities."
+      },
+      {
+        "id": 6,
+        "name": "The Ritz-Carlton Bengaluru",
+        "image_url": "https://i.pinimg.com/736x/af/8c/1b/af8c1b8cdb5a065bb30c7060db35d9f6.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/66/e2/8b/66e28b08d60f9248317aa47172125de2.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/1e/fe/f2/1efef20d909acde0d93666b8b4ccdba2.jpg",
+        "price": 25000,
+        "rating": 4.9,
+        "address": "99, Residency Road, Bengaluru, Karnataka 560025",
+        "description": "Ultra-luxury hotel with rooftop bar, premium spa, and fine dining experiences."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "state": "Gujarat",
+    "image_url": "https://i.pinimg.com/1200x/1f/c7/08/1fc708e9add0cae27503cffb47204f7a.jpg",
+    "description": "Known for Rann of Kutch, Gir Forest, and Statue of Unity",
+    "gujarat": [
+      {
+        "id": 1,
+        "name": "The Grand Bhagwati Ahmedabad",
+        "image_url": "https://i.pinimg.com/736x/af/8c/1b/af8c1b8cdb5a065bb30c7060db35d9f6.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a0/4a/a3/a04aa347e48996997aec9e947ba1e9e5.jpg",
+        "price": 11000,
+        "rating": 4.6,
+        "address": "SG Highway, Ahmedabad, Gujarat 380054",
+        "description": "Luxury hotel showcasing Gujarati culture with traditional cuisine and modern business facilities."
+      },
+      {
+        "id": 2,
+        "name": "Rann Riders Resort",
+        "image_url": "https://i.pinimg.com/1200x/7b/0b/db/7b0bdb4850ba4a266807dfc1eb918ce5.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a0/4a/a3/a04aa347e48996997aec9e947ba1e9e5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "price": 9500,
+        "rating": 4.5,
+        "address": "Dasada, Surendranagar, Gujarat 382745",
+        "description": "Desert resort offering wildlife safaris, cultural performances, and traditional Kutchi cuisine."
+      },
+      {
+        "id": 3,
+        "name": "The Fern Gir Forest Resort",
+        "image_url": "https://i.pinimg.com/1200x/13/fe/d0/13fed0808bbb48e37a08b7113d88e11e.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/af/8c/1b/af8c1b8cdb5a065bb30c7060db35d9f6.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/05/2f/8b/052f8be2ed6c6ed06732d99d6bc1c450.jpg",
+        "price": 12000,
+        "rating": 4.4,
+        "address": "Sasan Gir, Gujarat 362135",
+        "description": "Eco-friendly resort near Gir National Park offering lion safaris and tribal cultural experiences."
+      },
+      {
+        "id": 4,
+        "name": "Tent City Narmada",
+        "image_url": "https://i.pinimg.com/1200x/50/46/89/504689f7a0607b1b2c8ba90855d2e7ff.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/13/fe/d0/13fed0808bbb48e37a08b7113d88e11e.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/7b/0b/db/7b0bdb4850ba4a266807dfc1eb918ce5.jpg",
+        "price": 15000,
+        "rating": 4.7,
+        "address": "Statue of Unity Area, Kevadia, Gujarat 393155",
+        "description": "Luxury tent accommodation near Statue of Unity with river views and laser light shows."
+      },
+      {
+        "id": 5,
+        "name": "Ummed Ahmedabad",
+        "image_url": "https://i.pinimg.com/736x/1b/5c/93/1b5c93face40dd282a929e3ccd24a04a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/50/46/89/504689f7a0607b1b2c8ba90855d2e7ff.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/13/fe/d0/13fed0808bbb48e37a08b7113d88e11e.jpg",
+        "price": 13000,
+        "rating": 4.6,
+        "address": "International Airport Circle, Ahmedabad, Gujarat 380054",
+        "description": "Palatial luxury hotel with royal treatment, spa services, and Gujarati thali dining."
+      },
+      {
+        "id": 6,
+        "name": "White Rann Resort",
+        "image_url": "https://i.pinimg.com/736x/8d/3f/f7/8d3ff77e3eb7e490f64c7b1fe2b01944.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/1b/5c/93/1b5c93face40dd282a929e3ccd24a04a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/50/46/89/504689f7a0607b1b2c8ba90855d2e7ff.jpg",
+        "price": 14000,
+        "rating": 4.5,
+        "address": "Khavda, Kutch, Gujarat 370430",
+        "description": "Desert camp in White Rann offering full moon experiences and traditional handicraft workshops."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "state": "West Bengal",
+    "image_url": "https://i.pinimg.com/736x/54/21/10/542110d1305af68e0c380692259c10aa.jpg",
+    "description": "Famous for Darjeeling tea, Sundarbans, and cultural capital Kolkata",
+    "westbengal": [
+      {
+        "id": 1,
+        "name": "Taj Bengal Kolkata",
+        "image_url": "https://i.pinimg.com/736x/1b/5c/93/1b5c93face40dd282a929e3ccd24a04a.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/8d/3f/f7/8d3ff77e3eb7e490f64c7b1fe2b01944.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/7b/ef/80/7bef8027c4ce1bc311569f133d6cc940.jpg",
+        "price": 14000,
+        "rating": 4.7,
+        "address": "34B, Belvedere Road, Alipore, Kolkata, West Bengal 700027",
+        "description": "Luxury hotel showcasing Bengali culture with fine dining, art gallery, and colonial heritage."
+      },
+      {
+        "id": 2,
+        "name": "The Oberoi Grand Kolkata",
+        "image_url": "https://i.pinimg.com/1200x/7b/ef/80/7bef8027c4ce1bc311569f133d6cc940.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/79/22/fb/7922fbf0dc2478d9d6b8179306e080ae.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/8d/3f/f7/8d3ff77e3eb7e490f64c7b1fe2b01944.jpg",
+        "price": 16000,
+        "rating": 4.8,
+        "address": "15, Jawaharlal Nehru Road, Kolkata, West Bengal 700013",
+        "description": "Historic luxury hotel with Victorian architecture, poolside dining, and cultural events."
+      },
+      {
+        "id": 3,
+        "name": "Mayfair Darjeeling",
+        "image_url": "https://i.pinimg.com/1200x/79/22/fb/7922fbf0dc2478d9d6b8179306e080ae.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/7b/ef/80/7bef8027c4ce1bc311569f133d6cc940.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/6b/4b/31/6b4b31ef07a1fd9c72f462f2cc705b9f.jpg",
+        "price": 12000,
+        "rating": 4.6,
+        "address": "The Mall Road, Darjeeling, West Bengal 734101",
+        "description": "Heritage hotel with tea garden views, colonial charm, and Kanchenjunga sunrise viewing."
+      },
+      {
+        "id": 4,
+        "name": "ITC Royal Bengal Kolkata",
+        "image_url": "https://i.pinimg.com/736x/6b/4b/31/6b4b31ef07a1fd9c72f462f2cc705b9f.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/e5/09/a8/e509a837f320131978d76f452a621724.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/79/22/fb/7922fbf0dc2478d9d6b8179306e080ae.jpg",
+        "price": 15000,
+        "rating": 4.7,
+        "address": "1, Kolkata International Airport, Kolkata, West Bengal 700052",
+        "description": "Modern luxury hotel inspired by royal Bengal tiger with sustainable practices and local art."
+      },
+      {
+        "id": 5,
+        "name": "Glenburn Tea Estate",
+        "image_url": "https://i.pinimg.com/1200x/e5/09/a8/e509a837f320131978d76f452a621724.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/6b/4b/31/6b4b31ef07a1fd9c72f462f2cc705b9f.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/16/e4/1d/16e41db03cf6ca7fb236b93c5b6b0879.jpg",
+        "price": 18000,
+        "rating": 4.8,
+        "address": "Glenburn, Darjeeling, West Bengal 734101",
+        "description": "Working tea plantation boutique hotel with tea tasting sessions and river camp experiences."
+      },
+      {
+        "id": 6,
+        "name": "Sunderban Tiger Camp",
+        "image_url": "https://i.pinimg.com/1200x/16/e4/1d/16e41db03cf6ca7fb236b93c5b6b0879.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/23/73/c7/2373c73b6990f6e793b92ffa875865cc.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/e5/09/a8/e509a837f320131978d76f452a621724.jpg",
+        "price": 8000,
+        "rating": 4.3,
+        "address": "Dayapur Island, Sundarbans, West Bengal 743370",
+        "description": "Eco-resort in mangrove forests offering tiger safaris, bird watching, and river cruises."
+      }
+    ]
+  }
+]

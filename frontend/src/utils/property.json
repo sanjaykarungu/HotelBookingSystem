@@ -1,0 +1,755 @@
+[
+  {
+    "type": "Luxury Hotel",
+    "name": "Burj Al Arab",
+    "image_url": "https://i.pinimg.com/1200x/15/d6/5f/15d65f2df30d40447f4f60009a2567d1.jpg",
+    "location": "Dubai, UAE",
+    "description": "7-star luxury hotel with butler service and premium amenities",
+    "luxury_hotel": [
+      {
+        "name": "The Ritz-Carlton",
+        "image_url": "https://i.pinimg.com/1200x/b8/ee/fa/b8eefa6aeae2677192a3d2d63b88ec32.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/24/2a/55/242a5508e28b211f1e8016550d5e69c8.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/4a/39/ab/4a39ab20cfd342d458f12f1fa84c79c8.jpg",
+        "price": 650,
+        "rating": 4.8,
+        "address": "123 Central Park South, New York, NY 10019",
+        "description": "Iconic luxury hotel offering panoramic views of Central Park with world-class amenities and service.",
+        "state": "NY"
+      },
+      {
+        "name": "Waldorf Astoria",
+        "image_url": "https://i.pinimg.com/1200x/5a/d2/55/5ad255d9aee58400b5031996b580cd7a.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/e1/be/d0/e1bed02fa2e2fa4e816630fafab04b9f.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/fc/43/ed/fc43ed7af14d631b996e324f1bf59581.jpg",
+        "price": 720,
+        "rating": 4.9,
+        "address": "9850 Wilshire Boulevard, Beverly Hills, CA 90210",
+        "description": "Legendary luxury hotel featuring exquisite accommodations and exceptional dining experiences.",
+        "state": "CA"
+      },
+      {
+        "name": "Four Seasons",
+        "image_url": "https://i.pinimg.com/1200x/fc/43/ed/fc43ed7af14d631b996e324f1bf59581.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/5a/d2/55/5ad255d9aee58400b5031996b580cd7a.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/e1/be/d0/e1bed02fa2e2fa4e816630fafab04b9f.jpg",
+        "price": 580,
+        "rating": 4.7,
+        "address": "120 East Delaware Place, Chicago, IL 60611",
+        "description": "Sophisticated luxury hotel with spa services and fine dining in the heart of Chicago.",
+        "state": "IL"
+      },
+      {
+        "name": "The St. Regis",
+        "image_url": "https://i.pinimg.com/1200x/e1/be/d0/e1bed02fa2e2fa4e816630fafab04b9f.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/fc/43/ed/fc43ed7af14d631b996e324f1bf59581.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/5a/d2/55/5ad255d9aee58400b5031996b580cd7a.jpg",
+        "price": 690,
+        "rating": 4.8,
+        "address": "1050 Brickell Avenue, Miami, FL 33131",
+        "description": "Elegant waterfront hotel offering butler service and luxurious accommodations.",
+        "state": "FL"
+      },
+      {
+        "name": "Fairmont Grand",
+        "image_url": "https://i.pinimg.com/736x/f3/69/58/f3695855c58ac3535b47bc00072e954c.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/04/42/d4/0442d4c60cc0456bf937deb258176ccd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/4d/11/6b/4d116bf43d13e66617a0a95dba572c4f.jpg",
+        "price": 550,
+        "rating": 4.6,
+        "address": "950 Mason Street, San Francisco, CA 94108",
+        "description": "Historic luxury hotel atop Nob Hill with stunning city and bay views.",
+        "state": "CA"
+      },
+      {
+        "name": "The Peninsula",
+        "image_url": "https://i.pinimg.com/736x/04/42/d4/0442d4c60cc0456bf937deb258176ccd.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/f3/69/58/f3695855c58ac3535b47bc00072e954c.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/4d/11/6b/4d116bf43d13e66617a0a95dba572c4f.jpg",
+        "price": 780,
+        "rating": 4.9,
+        "address": "9882 Little Santa Monica Blvd, Beverly Hills, CA 90212",
+        "description": "Ultra-luxury hotel featuring rooftop pool and exceptional personalized service.",
+        "state": "CA"
+      }
+    ]
+  },
+  {
+    "type": "Beach Resort",
+    "name": "Four Seasons Resort Maldives",
+    "image_url": "https://th.bing.com/th/id/OIP._Kxe3vHeblw4_1KkmplRcwHaEK?w=342&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    "location": "Maldives",
+    "description": "Overwater villas with private pools and direct ocean access",
+    "beach_resort": [
+      {
+        "name": "Hawaiian Paradise Resort",
+        "image_url": "https://i.pinimg.com/736x/5d/fa/d5/5dfad591985440638c5928823354bbbc.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/9a/70/41/9a7041ec50caf700259e2fe287d554ec.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/c0/b5/2e/c0b52ef082dac6e508abdcf1168f601c.jpg",
+        "price": 420,
+        "rating": 4.7,
+        "address": "123 Beachfront Road, Honolulu, HI 96815",
+        "description": "Tropical beachfront resort with private beach access and ocean-view suites.",
+        "state": "HI"
+      },
+      {
+        "name": "Maui Oceanfront Resort",
+        "image_url": "https://i.pinimg.com/736x/c0/b5/2e/c0b52ef082dac6e508abdcf1168f601c.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/5d/fa/d5/5dfad591985440638c5928823354bbbc.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/9a/70/41/9a7041ec50caf700259e2fe287d554ec.jpg",
+        "price": 380,
+        "rating": 4.6,
+        "address": "456 Coastal Highway, Lahaina, HI 96761",
+        "description": "Luxurious beach resort with infinity pools and direct beach access.",
+        "state": "HI"
+      },
+      {
+        "name": "Florida Keys Retreat",
+        "image_url": "https://i.pinimg.com/1200x/9a/70/41/9a7041ec50caf700259e2fe287d554ec.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/c0/b5/2e/c0b52ef082dac6e508abdcf1168f601c.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/5d/fa/d5/5dfad591985440638c5928823354bbbc.jpg",
+        "price": 320,
+        "rating": 4.5,
+        "address": "789 Ocean Drive, Key West, FL 33040",
+        "description": "Seaside resort offering water sports and stunning sunset views.",
+        "state": "FL"
+      },
+      {
+        "name": "California Beach Club",
+        "image_url": "https://i.pinimg.com/736x/bc/95/a4/bc95a4d5867c1c1cd03a68332fad4eec.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/1d/36/cf/1d36cfdc53aae771276f07b1d549cda5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/bb/f2/33/bbf233c67020e3f9a303e6e03fbf03a3.jpg",
+        "price": 450,
+        "rating": 4.8,
+        "address": "321 Shoreline Avenue, Malibu, CA 90265",
+        "description": "Exclusive beach club resort with private cabanas and gourmet dining.",
+        "state": "CA"
+      },
+      {
+        "name": "South Carolina Shores",
+        "image_url": "https://i.pinimg.com/736x/bb/f2/33/bbf233c67020e3f9a303e6e03fbf03a3.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/bc/95/a4/bc95a4d5867c1c1cd03a68332fad4eec.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/1d/36/cf/1d36cfdc53aae771276f07b1d549cda5.jpg",
+        "price": 290,
+        "rating": 4.4,
+        "address": "654 Beach Boulevard, Myrtle Beach, SC 29577",
+        "description": "Family-friendly beach resort with multiple pools and entertainment options.",
+        "state": "SC"
+      },
+      {
+        "name": "Texas Gulf Resort",
+        "image_url": "https://i.pinimg.com/736x/1d/36/cf/1d36cfdc53aae771276f07b1d549cda5.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/bb/f2/33/bbf233c67020e3f9a303e6e03fbf03a3.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/bc/95/a4/bc95a4d5867c1c1cd03a68332fad4eec.jpg",
+        "price": 270,
+        "rating": 4.3,
+        "address": "987 Gulf Shore Drive, Galveston, TX 77550",
+        "description": "Relaxing beachfront resort perfect for family vacations and romantic getaways.",
+        "state": "TX"
+      }
+    ]
+  },
+  {
+    "type": "Mountain Cabin",
+    "name": "Rocky Mountain Log Cabin",
+    "image_url": "https://th.bing.com/th/id/OIP.p1nlvcqnutdFBAfpzRWV5wHaE7?w=272&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    "location": "Colorado, USA",
+    "description": "Cozy wooden cabin with fireplace and mountain views",
+    "mountain_cabin": [
+      {
+        "name": "Rocky Mountain Retreat",
+        "image_url": "https://i.pinimg.com/1200x/98/26/94/982694e67bfff1db3e2bb79c89e184ab.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/35/29/6d/35296dffa455d5cf86a3a9a1b6b2990c.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/1b/71/de/1b71dea4bacf0ab3648e3f35d76b48f7.jpg",
+        "price": 180,
+        "rating": 4.6,
+        "address": "123 Mountain View Road, Aspen, CO 81611",
+        "description": "Cozy log cabin with fireplace and stunning mountain views.",
+        "state": "CO"
+      },
+      {
+        "name": "Smoky Mountains Cabin",
+        "image_url": "https://i.pinimg.com/736x/1b/71/de/1b71dea4bacf0ab3648e3f35d76b48f7.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/98/26/94/982694e67bfff1db3e2bb79c89e184ab.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/35/29/6d/35296dffa455d5cf86a3a9a1b6b2990c.jpg",
+        "price": 150,
+        "rating": 4.5,
+        "address": "456 Forest Trail, Gatlinburg, TN 37738",
+        "description": "Rustic cabin nestled in the Great Smoky Mountains with hot tub.",
+        "state": "TN"
+      },
+      {
+        "name": "Cascade Mountain Lodge",
+        "image_url": "https://i.pinimg.com/1200x/35/29/6d/35296dffa455d5cf86a3a9a1b6b2990c.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/1b/71/de/1b71dea4bacf0ab3648e3f35d76b48f7.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/98/26/94/982694e67bfff1db3e2bb79c89e184ab.jpg",
+        "price": 220,
+        "rating": 4.7,
+        "address": "789 Alpine Way, Leavenworth, WA 98826",
+        "description": "Luxury mountain cabin with modern amenities and wildlife viewing.",
+        "state": "WA"
+      },
+      {
+        "name": "Adirondack Wilderness Cabin",
+        "image_url": "https://i.pinimg.com/1200x/25/99/7b/25997bf702b7a3144d1c8384a39b6853.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/68/46/bb/6846bb4a36658a763ed5bcec270eb4ec.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/2c/3e/a3/2c3ea3bc54e700e0c955391c4fafa387.jpg",
+        "price": 130,
+        "rating": 4.4,
+        "address": "321 Lakeview Drive, Lake Placid, NY 12946",
+        "description": "Secluded cabin perfect for hiking and nature enthusiasts.",
+        "state": "NY"
+      },
+      {
+        "name": "Blue Ridge Mountain Cabin",
+        "image_url": "https://i.pinimg.com/736x/2c/3e/a3/2c3ea3bc54e700e0c955391c4fafa387.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/25/99/7b/25997bf702b7a3144d1c8384a39b6853.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/68/46/bb/6846bb4a36658a763ed5bcec270eb4ec.jpg",
+        "price": 160,
+        "rating": 4.5,
+        "address": "654 Ridge Road, Asheville, NC 28804",
+        "description": "Charming cabin with panoramic views of the Blue Ridge Mountains.",
+        "state": "NC"
+      },
+      {
+        "name": "Sierra Nevada Cabin",
+        "image_url": "https://i.pinimg.com/1200x/68/46/bb/6846bb4a36658a763ed5bcec270eb4ec.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/2c/3e/a3/2c3ea3bc54e700e0c955391c4fafa387.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/25/99/7b/25997bf702b7a3144d1c8384a39b6853.jpg",
+        "price": 190,
+        "rating": 4.6,
+        "address": "987 Pine Forest Lane, Lake Tahoe, CA 96150",
+        "description": "Modern cabin near ski resorts with wood-burning fireplace.",
+        "state": "CA"
+      }
+    ]
+  },
+  {
+    "type": "City Apartment",
+    "name": "Manhattan Luxury Apartment",
+    "image_url": "data:image/webp;base64,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",
+    "location": "New York City, USA",
+    "description": "Modern apartment in heart of Manhattan with city skyline views",
+    "city_apartment": [
+      {
+        "name": "Manhattan Skyline Apartment",
+        "image_url": "https://i.pinimg.com/736x/e8/da/cb/e8dacb9e4fc90ff6e9537645c9a63d88.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/d5/ff/5f/d5ff5fd2827dcccf3933f5b6bd1cf0f5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/22/cb/ea/22cbeaa8ab84db2c2a488963542e7264.jpg",
+        "price": 280,
+        "rating": 4.7,
+        "address": "123 Broadway, New York, NY 10001",
+        "description": "Modern apartment with stunning city views and premium amenities.",
+        "state": "NY"
+      },
+      {
+        "name": "Chicago River View Loft",
+        "image_url": "https://i.pinimg.com/736x/22/cb/ea/22cbeaa8ab84db2c2a488963542e7264.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/e8/da/cb/e8dacb9e4fc90ff6e9537645c9a63d88.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/d5/ff/5f/d5ff5fd2827dcccf3933f5b6bd1cf0f5.jpg",
+        "price": 220,
+        "rating": 4.6,
+        "address": "456 River North, Chicago, IL 60654",
+        "description": "Spacious loft apartment with panoramic river and city views.",
+        "state": "IL"
+      },
+      {
+        "name": "San Francisco Downtown Flat",
+        "image_url": "https://i.pinimg.com/736x/d5/ff/5f/d5ff5fd2827dcccf3933f5b6bd1cf0f5.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/22/cb/ea/22cbeaa8ab84db2c2a488963542e7264.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/e8/da/cb/e8dacb9e4fc90ff6e9537645c9a63d88.jpg",
+        "price": 250,
+        "rating": 4.5,
+        "address": "789 Market Street, San Francisco, CA 94105",
+        "description": "Charming apartment in the heart of downtown with modern comforts.",
+        "state": "CA"
+      },
+      {
+        "name": "Boston Historic Apartment",
+        "image_url": "https://i.pinimg.com/736x/0b/2f/e2/0b2fe2d5acf71d82b36ae5dc5fbb9b14.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/9a/f4/df/9af4dfecb5117a61ae7427cedb14639e.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/36/74/1c/36741ce70851ae76e97a7227adec1bed.jpg",
+        "price": 210,
+        "rating": 4.4,
+        "address": "321 Beacon Street, Boston, MA 02116",
+        "description": "Renovated historic apartment with modern amenities and classic charm.",
+        "state": "MA"
+      },
+      {
+        "name": "Miami Beach Condo",
+        "image_url": "https://i.pinimg.com/736x/36/74/1c/36741ce70851ae76e97a7227adec1bed.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/0b/2f/e2/0b2fe2d5acf71d82b36ae5dc5fbb9b14.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/9a/f4/df/9af4dfecb5117a61ae7427cedb14639e.jpg",
+        "price": 230,
+        "rating": 4.6,
+        "address": "654 Ocean Drive, Miami Beach, FL 33139",
+        "description": "Luxury beachfront condo with pool and ocean views.",
+        "state": "FL"
+      },
+      {
+        "name": "Seattle Urban Apartment",
+        "image_url": "https://i.pinimg.com/736x/9a/f4/df/9af4dfecb5117a61ae7427cedb14639e.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/36/74/1c/36741ce70851ae76e97a7227adec1bed.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/0b/2f/e2/0b2fe2d5acf71d82b36ae5dc5fbb9b14.jpg",
+        "price": 190,
+        "rating": 4.5,
+        "address": "987 Pike Street, Seattle, WA 98101",
+        "description": "Modern apartment in downtown Seattle with space needle views.",
+        "state": "WA"
+      }
+    ]
+  },
+  {
+    "type": "Boutique Hotel",
+    "name": "Ace Hotel Downtown",
+    "image_url": "https://th.bing.com/th/id/OIP.bVXmneZROBqE6pKUCo_qFQHaEK?w=333&h=187&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    "location": "Los Angeles, USA",
+    "description": "Stylish hotel with artistic design and cultural events",
+    "boutique_hotel": [
+      {
+        "name": "The Greenwich Hotel",
+        "image_url": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "price": 480,
+        "rating": 4.8,
+        "address": "123 Greenwich Street, New York, NY 10013",
+        "description": "Intimate boutique hotel with unique design and personalized service.",
+        "state": "NY"
+      },
+      {
+        "name": "Hotel Bel-Air",
+        "image_url": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "price": 520,
+        "rating": 4.9,
+        "address": "701 Stone Canyon Road, Los Angeles, CA 90077",
+        "description": "Legendary boutique hotel set on 12 acres of lush gardens.",
+        "state": "CA"
+      },
+      {
+        "name": "The James Chicago",
+        "image_url": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/3e/24/f3/3e24f3dcf850c53482122a0cf25f08ca.jpg",
+        "price": 320,
+        "rating": 4.6,
+        "address": "55 East Ontario Street, Chicago, IL 60611",
+        "description": "Design-forward boutique hotel with art-focused interiors.",
+        "state": "IL"
+      },
+      {
+       
+        "name": "The Betsy South Beach",
+        "image_url": "https://i.pinimg.com/736x/42/fc/9a/42fc9a8383520d0c0ef509074c493623.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/2a/9c/ad/2a9cad061783ab4f16f80f9767b0433b.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/8b/9d/c2/8b9dc228c637b55b1b5efba4ec54f9db.jpg",
+        "price": 380,
+        "rating": 4.7,
+        "address": "1440 Ocean Drive, Miami Beach, FL 33139",
+        "description": "Historic boutique hotel with literary theme and rooftop deck.",
+        "state": "FL"
+      },
+      {
+       
+        "name": "Hotel Zetta San Francisco",
+        "image_url": "https://i.pinimg.com/736x/8b/9d/c2/8b9dc228c637b55b1b5efba4ec54f9db.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/42/fc/9a/42fc9a8383520d0c0ef509074c493623.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/2a/9c/ad/2a9cad061783ab4f16f80f9767b0433b.jpg",
+        "price": 290,
+        "rating": 4.5,
+        "address": "55 5th Street, San Francisco, CA 94103",
+        "description": "Tech-inspired boutique hotel with playful design elements.",
+        "state": "CA"
+      },
+      {
+       
+        "name": "The Joule Dallas",
+        "image_url": "https://i.pinimg.com/736x/2a/9c/ad/2a9cad061783ab4f16f80f9767b0433b.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/8b/9d/c2/8b9dc228c637b55b1b5efba4ec54f9db.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/42/fc/9a/42fc9a8383520d0c0ef509074c493623.jpg",
+        "price": 350,
+        "rating": 4.7,
+        "address": "1530 Main Street, Dallas, TX 75201",
+        "description": "Art-centric boutique hotel with rooftop pool and contemporary art.",
+        "state": "TX"
+      }
+    ]
+  },
+  {
+    "type": "Home Stay",
+    "name": "Traditional Kerala Homestay",
+    "image_url": "https://q-xx.bstatic.com/xdata/images/hotel/263x210/595550377.jpeg?k=ef93cbc1a3af0d6db84e27b6da280a4ef24dbcfeb065fcfeae4fe9c43dddd2da&o=",
+    "location": "Munnar, Kerala, India",
+    "description": "Authentic family-run homestay with local cuisine and cultural experiences",
+    "home_stay": [
+      {
+        "name": "Brooklyn Brownstone Stay",
+        "image_url": "https://i.pinimg.com/736x/95/8f/1d/958f1da47a87363d203b048bee3b48f4.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "price": 120,
+        "rating": 4.6,
+        "address": "123 Park Slope, Brooklyn, NY 11215",
+        "description": "Charming brownstone home in historic neighborhood with garden.",
+        "state": "NY"
+      },
+      {
+        "name": "Portland Craftsman Home",
+        "image_url": "https://i.pinimg.com/736x/5c/97/72/5c9772a5c0fac313ee66cd4410f89699.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "price": 95,
+        "rating": 4.5,
+        "address": "456 Alberta Street, Portland, OR 97211",
+        "description": "Beautiful craftsman home with garden and local artwork.",
+        "state": "OR"
+      },
+      {
+        "name": "New Orleans Creole Cottage",
+        "image_url": "https://i.pinimg.com/736x/12/0e/09/120e090fb158c5f8a14efb5159343035.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "price": 110,
+        "rating": 4.7,
+        "address": "789 Frenchmen Street, New Orleans, LA 70116",
+        "description": "Historic creole cottage in the Marigny with courtyard.",
+        "state": "LA"
+      },
+      {
+        "name": "Charleston Historic Home",
+        "image_url": "https://i.pinimg.com/736x/96/9e/29/969e29466c4040aa181f7d80e6cac331.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "price": 130,
+        "rating": 4.8,
+        "address": "321 King Street, Charleston, SC 29401",
+        "description": "Antebellum home with period furnishings and southern charm.",
+        "state": "SC"
+      },
+      {
+        "name": "San Diego Bungalow",
+        "image_url": "https://i.pinimg.com/736x/68/f2/ad/68f2adfb280922dd7197a12b87f008dc.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "price": 105,
+        "rating": 4.5,
+        "address": "654 Mission Beach, San Diego, CA 92109",
+        "description": "Beach bungalow with ocean views and outdoor patio.",
+        "state": "CA"
+      },
+      {
+        "name": "Savannah Garden Home",
+        "image_url": "https://i.pinimg.com/736x/b8/1c/4e/b81c4effd55bd57b4a90a46fe789aff9.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a7/92/28/a792280c9521b9f53d904eb173dc6993.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/0b/d3/b7/0bd3b723d68b5696e51bd5ecbc2a61bd.jpg",
+        "price": 115,
+        "rating": 4.6,
+        "address": "987 Jones Street, Savannah, GA 31401",
+        "description": "Historic home with beautiful garden in Savannah's historic district.",
+        "state": "GA"
+      }
+    ]
+  },
+  {
+    "type": "Treehouse Resort",
+    "name": "Treehotel",
+    "image_url": "data:image/webp;base64,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",
+    "location": "Harads, Sweden",
+    "description": "Modern treehouses in Arctic Circle forest",
+    "treehouse_resort": [
+      {
+        "name": "Redwood Canopy Retreat",
+        "image_url": "https://i.pinimg.com/736x/5d/f7/0d/5df70d9168c18f2e1171cd70c5ff9dc4.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "price": 320,
+        "rating": 4.8,
+        "address": "123 Forest Lane, Santa Cruz, CA 95060",
+        "description": "Luxury treehouse nestled among ancient redwood trees.",
+        "state": "CA"
+      },
+      {
+        "name": "Blue Ridge Treehouse",
+        "image_url": "https://i.pinimg.com/736x/45/65/01/45650173d508f06c41263034192dca71.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "price": 280,
+        "rating": 4.7,
+        "address": "456 Mountain View, Asheville, NC 28804",
+        "description": "Eco-friendly treehouse with panoramic mountain views.",
+        "state": "NC"
+      },
+      {
+        "name": "Pacific Northwest Treehouse",
+        "image_url": "https://i.pinimg.com/1200x/40/fc/dd/40fcdd08de4892493442d2fdaab370fa.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "price": 350,
+        "rating": 4.9,
+        "address": "789 Evergreen Way, Seattle, WA 98122",
+        "description": "Architectural masterpiece among Douglas fir trees.",
+        "state": "WA"
+      },
+      {
+        "name": "Adirondack Treehouse Lodge",
+        "image_url": "https://i.pinimg.com/1200x/74/e5/68/74e568abb5749601e45bba2fb7f74f0f.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "price": 240,
+        "rating": 4.6,
+        "address": "321 Lake Road, Lake Placid, NY 12946",
+        "description": "Rustic treehouse retreat perfect for nature lovers.",
+        "state": "NY"
+      },
+      {
+        "name": "Ozark Mountain Treehouse",
+        "image_url": "https://i.pinimg.com/736x/bb/6e/0b/bb6e0b7c8a22db75f2ab65b3e65d4a41.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "price": 190,
+        "rating": 4.5,
+        "address": "654 Wilderness Trail, Eureka Springs, AR 72632",
+        "description": "Secluded treehouse with hot tub and forest views.",
+        "state": "AR"
+      },
+      {
+        "name": "Colorado Alpine Treehouse",
+        "image_url": "https://i.pinimg.com/736x/4a/55/b3/4a55b3fd5d765cb9e9e80366ea76051d.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/a0/52/5c/a0525c63c92d1f0f0e689adf16c938c9.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/64/4b/40/644b40325ff1576ca8873e661f88d069.jpg",
+        "price": 310,
+        "rating": 4.7,
+        "address": "987 Aspen Grove, Breckenridge, CO 80424",
+        "description": "Luxury treehouse at high altitude with stunning vistas.",
+        "state": "CO"
+      }
+    ]
+  },
+  {
+    "type": "Hostel",
+    "name": "The Flying Pig Downtown Hostel",
+    "image_url": "https://r-xx.bstatic.com/xdata/images/hotel/263x210/595550415.jpeg?k=8967853a074040381dfa25a568e6c780e309b529e0c144995c5bbc9644721eca&o=",
+    "location": "Amsterdam, Netherlands",
+    "description": "Popular budget hostel with social atmosphere in city center",
+    "hostel": [
+      {
+        "name": "HI New York City Hostel",
+        "image_url": "https://i.pinimg.com/736x/0e/95/4b/0e954b356f560ad83ac1d7f1b41425ec.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 45,
+        "rating": 4.3,
+        "address": "891 Amsterdam Ave, New York, NY 10025",
+        "description": "Budget-friendly hostel in Upper West Side with social atmosphere.",
+        "state": "NY"
+      },
+      {
+        "name": "Green Tortoise Hostel",
+        "image_url": "https://i.pinimg.com/1200x/13/6c/65/136c659e49f3a0f3e9eb2ea4fb34f625.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 38,
+        "rating": 4.2,
+        "address": "494 Broadway, San Francisco, CA 94133",
+        "description": "Historic hostel in North Beach with free breakfast and social events.",
+        "state": "CA"
+      },
+      {
+        "name": "Chicago Getaway Hostel",
+        "image_url": "https://i.pinimg.com/1200x/b8/f7/a4/b8f7a4349352eb9ed0ed4bcf1948e4f2.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 42,
+        "rating": 4.4,
+        "address": "616 W Arlington Pl, Chicago, IL 60614",
+        "description": "Friendly hostel in Lincoln Park with kitchen and common areas.",
+        "state": "IL"
+      },
+      {
+        "name": "Portland Northwest Hostel",
+        "image_url": "https://i.pinimg.com/1200x/b9/5d/d8/b95dd863824266252d97dbf8c31e980f.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 35,
+        "rating": 4.3,
+        "address": "425 NW 18th Ave, Portland, OR 97209",
+        "description": "Eco-friendly hostel in the Pearl District with bike rentals.",
+        "state": "OR"
+      },
+      {
+        "name": "Miami Beach International",
+        "image_url": "https://i.pinimg.com/736x/3c/21/85/3c21855ae3b2992510abc5049a803b02.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 48,
+        "rating": 4.1,
+        "address": "236 9th St, Miami Beach, FL 33139",
+        "description": "Beachfront hostel with pool and social activities.",
+        "state": "FL"
+      },
+      {
+        "name": "Austin Firehouse Hostel",
+        "image_url": "https://i.pinimg.com/736x/a4/b7/28/a4b728686025353f267255a02015634c.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/08/10/89/08108927a0b14bddbe17d7370e8feffd.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f0/c6/4c/f0c64cd5eabb45fa5383b545fbc0e99e.jpg",
+        "price": 40,
+        "rating": 4.5,
+        "address": "605 Brazos St, Austin, TX 78701",
+        "description": "Unique hostel in converted firehouse with live music venue.",
+        "state": "TX"
+      }
+    ]
+  },
+  {
+    "type": "Cottage",
+    "name": "Lakeview Woodland Cottage",
+    "image_url": "https://q-xx.bstatic.com/xdata/images/hotel/263x210/595550000.jpeg?k=71eeb3e0996d7f734e57a6fa426c718749a36df768ca5d2fb1dc65fcd7483c1d&o=",
+    "location": "Lake District, Cumbria, England",
+    "description": "Charming traditional cottage with lake views and fireplace",
+    "cottage": [
+      {
+        "name": "Cape Cod Seaside Cottage",
+        "image_url": "https://i.pinimg.com/736x/05/02/02/050202a262194fa5e911ac6781b78019.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "price": 220,
+        "rating": 4.7,
+        "address": "123 Ocean View Drive, Cape Cod, MA 02653",
+        "description": "Charming seaside cottage with private beach access and garden.",
+        "state": "MA"
+      },
+      {
+        "name": "Michigan Lake Cottage",
+        "image_url": "https://i.pinimg.com/1200x/e2/e8/b8/e2e8b8dc73e223b14a62482a3e381a82.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "price": 180,
+        "rating": 4.6,
+        "address": "456 Lake Shore Road, Traverse City, MI 49684",
+        "description": "Cozy lakefront cottage with dock and sunset views.",
+        "state": "MI"
+      },
+      {
+        "name": "California Wine Country Cottage",
+        "image_url": "https://i.pinimg.com/1200x/9e/62/2e/9e622e65e77d2f12854e8747f263848c.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "price": 250,
+        "rating": 4.8,
+        "address": "789 Vineyard Lane, Napa, CA 94558",
+        "description": "Romantic cottage surrounded by vineyards with wine tasting access.",
+        "state": "CA"
+      },
+      {
+        "name": "Vermont Country Cottage",
+        "image_url": "https://i.pinimg.com/736x/e4/c9/cf/e4c9cf1f70241c7885f9674a7a574568.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "price": 160,
+        "rating": 4.5,
+        "address": "321 Maple Road, Stowe, VT 05672",
+        "description": "Quaint country cottage with wood stove and mountain views.",
+        "state": "VT"
+      },
+      {
+        "name": "Oregon Coast Cottage",
+        "image_url": "https://i.pinimg.com/736x/91/13/bf/9113bfef3b42685a5b0bd3fb52b4acf9.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "price": 190,
+        "rating": 4.6,
+        "address": "654 Coastal Highway, Cannon Beach, OR 97110",
+        "description": "Beach cottage with ocean views and direct beach access.",
+        "state": "OR"
+      },
+      {
+        "name": "Texas Hill Country Cottage",
+        "image_url": "https://i.pinimg.com/1200x/06/2a/fa/062afa0f5e40176392c80b03964669c1.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/5a/db/d8/5adbd891eb537697f648e25aea2e5a93.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/88/eb/00/88eb00112f1e9f83d649385c7447fb75.jpg",
+        "price": 170,
+        "rating": 4.4,
+        "address": "987 Ranch Road, Fredericksburg, TX 78624",
+        "description": "Rustic cottage in Texas wine country with porch and views.",
+        "state": "TX"
+      }
+    ]
+  },
+  {
+    "type": "Houseboat",
+    "name": "Kerala Houseboats",
+    "image_url": "https://th.bing.com/th/id/OIP.vMJQ0X5bypmAkSOfGvTs8QHaFi?w=248&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    "location": "Alleppey, Kerala, India",
+    "description": "Traditional houseboats on Kerala backwaters",
+    "houseboat": [
+      {
+        "name": "Sausalito Floating Home",
+        "image_url": "https://i.pinimg.com/1200x/dd/20/11/dd20110129f76269feb9389d0393c1c5.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "price": 380,
+        "rating": 4.8,
+        "address": "123 Gate 5 Road, Sausalito, CA 94965",
+        "description": "Luxury houseboat with panoramic bay views and modern amenities.",
+        "state": "CA"
+      },
+      {
+        "name": "Seattle Lake Union Houseboat",
+        "image_url": "https://i.pinimg.com/1200x/43/da/ca/43daca53e78ae7435ee774a59e9a6636.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "price": 320,
+        "rating": 4.7,
+        "address": "456 Westlake Ave N, Seattle, WA 98109",
+        "description": "Floating home with city skyline views and deck access.",
+        "state": "WA"
+      },
+      {
+        "name": "Florida Keys Houseboat",
+        "image_url": "https://i.pinimg.com/1200x/f0/bd/d0/f0bdd0a04ef932977809b8044128a776.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "price": 290,
+        "rating": 4.6,
+        "address": "789 Overseas Highway, Marathon, FL 33050",
+        "description": "Tropical houseboat with fishing platform and water access.",
+        "state": "FL"
+      },
+      {
+        "name": "Lake Powell Houseboat",
+        "image_url": "https://i.pinimg.com/736x/27/d7/22/27d72240d4f56d0bf0de828c6cec1f8c.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "price": 450,
+        "rating": 4.9,
+        "address": "123 Lake Shore Drive, Page, AZ 86040",
+        "description": "Spacious houseboat for exploring Lake Powell's canyons.",
+        "state": "AZ"
+      },
+      {
+        "name": "Maryland Chesapeake Bay Boat",
+        "image_url": "https://i.pinimg.com/736x/78/05/91/780591231e8c3a9615fa354f8e25be28.jpg",
+        "image_url_1": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "image_url_2": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "price": 270,
+        "rating": 4.5,
+        "address": "456 Bay Front Road, Annapolis, MD 21403",
+        "description": "Classic houseboat on Chesapeake Bay with crab fishing.",
+        "state": "MD"
+      },
+      {
+        "name": "Louisiana Bayou Houseboat",
+        "image_url": "https://i.pinimg.com/1200x/6a/b9/59/6ab9598c6a74c7909c5bbb2b42269962.jpg",
+        "image_url_1": "https://i.pinimg.com/736x/f8/9b/db/f89bdb011ed36abab73e250b42ae1d75.jpg",
+        "image_url_2": "https://i.pinimg.com/1200x/75/a6/94/75a694a5ff6432bc1c791773e48802a5.jpg",
+        "price": 210,
+        "rating": 4.4,
+        "address": "789 Swamp Road, New Orleans, LA 70124",
+        "description": "Authentic houseboat experience in the Louisiana bayou.",
+        "state": "LA"
+      }
+    ]
+  }
+]
