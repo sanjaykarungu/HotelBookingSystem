@@ -22,61 +22,152 @@ const PropertyRoomDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Test backend connection first
+  useEffect(() => {
+    const testBackendConnection = async () => {
+      try {
+        console.log("🔍 Testing backend connection for PropertyRoomDetails...");
+        const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
+        
+        if (!testResponse.ok) {
+          throw new Error(`Backend test failed with status: ${testResponse.status}`);
+        }
+        
+        const testData = await testResponse.json();
+        console.log("✅ Backend connection successful:", testData);
+      } catch (testError) {
+        console.error("❌ Backend connection test failed:", testError);
+      }
+    };
+    
+    testBackendConnection();
+  }, []);
+
   // Fetch property and hotel data from your backend API
   useEffect(() => {
     const fetchPropertyAndHotel = async () => {
       try {
         setLoading(true);
+        setError(null);
+        console.log(`🔄 Fetching property data for ID: ${propertyId}`);
         
         // Fetch property data
-        const propertyResponse = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/${propertyId}`);
+        const propertyResponse = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/${propertyId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        });
+        
+        console.log("📡 Property response status:", propertyResponse.status);
+        console.log("📡 Property response ok:", propertyResponse.ok);
         
         if (!propertyResponse.ok) {
-          throw new Error('Failed to fetch property data');
+          const errorText = await propertyResponse.text();
+          console.error("❌ Property response error text:", errorText);
+          throw new Error(`Failed to fetch property data: ${propertyResponse.status} - ${propertyResponse.statusText}`);
         }
         
         const propertyData = await propertyResponse.json();
-        const propertyInfo = propertyData.data || propertyData;
+        console.log("📦 Full property API response:", propertyData);
+        
+        // Handle different property response formats
+        let propertyInfo = null;
+        if (propertyData.data) {
+          console.log("✅ Property data found in data.data");
+          propertyInfo = propertyData.data;
+        } else if (propertyData) {
+          console.log("✅ Property data found directly");
+          propertyInfo = propertyData;
+        } else {
+          throw new Error('Invalid property data format from API');
+        }
+        
         setProperty(propertyInfo);
 
-        // Get property-specific hotels
+        // Get property-specific hotels - enhanced search
+        console.log("🔍 Searching for hotels in property data...");
+        console.log("🔍 Property object keys:", Object.keys(propertyInfo));
+        
         const getPropertyHotels = () => {
           if (!propertyInfo) return [];
           
           const propertyType = propertyInfo.type?.toLowerCase().replace(' ', '_');
+          const propertyName = propertyInfo.name?.toLowerCase().replace(' ', '_');
           const possibleKeys = [
             propertyType,
+            propertyName,
             'hotels',
+            'hotel',
             'properties',
+            'property',
             'accommodations',
-            'rooms'
+            'rooms',
+            'listings'
           ];
 
           for (const key of possibleKeys) {
             if (propertyInfo[key] && Array.isArray(propertyInfo[key])) {
+              console.log(`✅ Hotels found in property.${key}: ${propertyInfo[key].length} items`);
               return propertyInfo[key];
             }
           }
+          
+          // Search all arrays in the property data
+          console.log("🔍 Searching all arrays in property data");
+          for (const key in propertyInfo) {
+            if (Array.isArray(propertyInfo[key]) && propertyInfo[key].length > 0) {
+              // Check if this array contains hotel-like objects
+              const firstItem = propertyInfo[key][0];
+              if (firstItem && (firstItem.name || firstItem.price || firstItem.image_url)) {
+                console.log(`✅ Hotels found in property.${key}: ${propertyInfo[key].length} items`);
+                return propertyInfo[key];
+              }
+            }
+          }
+          
+          console.log("ℹ️ No hotels array found in property data");
           return [];
         };
 
         const propertyHotels = getPropertyHotels();
         
         // Find the specific hotel
-        const foundHotel = propertyHotels.find((item) => 
+        console.log(`🔍 Looking for hotel with ID: ${hotelId} in ${propertyHotels.length} hotels`);
+        
+        let foundHotel = propertyHotels.find((item) => 
           (item.id && item.id.toString() === hotelId) || 
-          (item._id && item._id.toString() === hotelId)
+          (item._id && item._id.toString() === hotelId) ||
+          (item.id && item.id.toString() === hotelId.toString())
         );
 
-        if (!foundHotel) {
-          throw new Error('Hotel not found');
+        // If not found by ID, try by index or other methods
+        if (!foundHotel && propertyHotels.length > 0) {
+          console.log("🔍 Hotel not found by ID, trying alternative methods");
+          // Try to find by index if hotelId is a number
+          const hotelIndex = parseInt(hotelId);
+          if (!isNaN(hotelIndex) && hotelIndex >= 0 && hotelIndex < propertyHotels.length) {
+            foundHotel = propertyHotels[hotelIndex];
+            console.log("✅ Hotel found by index:", hotelIndex);
+          }
         }
 
+        if (!foundHotel) {
+          console.error("❌ Hotel not found. Available hotels:", propertyHotels);
+          throw new Error('Hotel not found in the property data');
+        }
+
+        console.log("✅ Hotel found:", foundHotel);
         setHotel(foundHotel);
-        setError(null);
+        
       } catch (err) {
-        setError(err.message);
-        console.error('Error fetching property and hotel:', err);
+        console.error('❌ Error fetching property and hotel:', err);
+        console.error('🔍 Error details:', {
+          message: err.message,
+          name: err.name,
+        });
+        setError('Failed to load hotel details: ' + err.message);
       } finally {
         setLoading(false);
       }
@@ -84,66 +175,11 @@ const PropertyRoomDetails = () => {
 
     if (propertyId && hotelId) {
       fetchPropertyAndHotel();
+    } else {
+      setError('Missing property ID or hotel ID');
+      setLoading(false);
     }
   }, [propertyId, hotelId]);
-
-  // Loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Loading...</h1>
-          <p className="text-gray-600 text-lg">Fetching hotel details...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Error</h1>
-          <p className="text-red-500 text-lg mb-6">{error}</p>
-          <button 
-            onClick={() => navigate(`/property/${propertyId}`)}
-            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Back to Property
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!property) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Property Not Found</h1>
-          <p className="text-gray-600 text-lg">The property you're looking for doesn't exist.</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!hotel) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Hotel Not Found</h1>
-          <p className="text-gray-600 text-lg">The hotel you're looking for doesn't exist.</p>
-          <button 
-            onClick={() => navigate(`/property/${propertyId}`)}
-            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Back to {property.type}
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   // Handle input changes for booking form
   const handleInputChange = (e) => {
@@ -158,14 +194,19 @@ const PropertyRoomDetails = () => {
   const handleAddToCart = (hotel, e) => {
     if (e) e.stopPropagation();
     
-    // Create cart item
+    if (!hotel) {
+      alert('Hotel data not available');
+      return;
+    }
+
+    // Create cart item with fallback values
     const cartItem = {
-      id: hotel.id || hotel._id,
-      name: hotel.name,
-      price: hotel.price,
-      image: hotel.image_url,
-      rating: hotel.rating,
-      address: hotel.address,
+      id: hotel._id || hotel.id || Date.now().toString(),
+      name: hotel.name || 'Unnamed Hotel',
+      price: hotel.price || hotel.price_per_night || hotel.starting_price || 0,
+      image: hotel.image_url || hotel.image || hotel.photo,
+      rating: hotel.rating || hotel.star_rating,
+      address: hotel.address || hotel.location || 'Address not available',
       quantity: 1
     };
 
@@ -184,11 +225,17 @@ const PropertyRoomDetails = () => {
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
     
-    alert(`${hotel.name} added to cart successfully!`);
+    console.log('🛒 Added to cart:', cartItem);
+    alert(`${hotel.name || 'Hotel'} added to cart successfully!`);
   }
 
   // Function to handle book now
   const handleBookNow = () => {
+    if (!hotel) {
+      alert('Hotel data not available');
+      return;
+    }
+
     // Validate dates
     if (!bookingData.checkIn || !bookingData.checkOut) {
       alert('Please select check-in and check-out dates');
@@ -202,13 +249,14 @@ const PropertyRoomDetails = () => {
     const checkIn = new Date(bookingData.checkIn);
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-    const totalAmount = ((hotel.price || 0) * nights) + 800; // Room price + fees (500 + 300)
+    const roomPrice = hotel.price || hotel.price_per_night || hotel.starting_price || 0;
+    const totalAmount = (roomPrice * nights) + 800; // Room price + fees (500 + 300)
 
     // Create booking object
     const newBooking = {
       id: bookingId,
-      hotelName: hotel.name,
-      hotelImage: hotel.image_url,
+      hotelName: hotel.name || 'Unnamed Hotel',
+      hotelImage: hotel.image_url || hotel.image || hotel.photo,
       checkIn: bookingData.checkIn,
       checkOut: bookingData.checkOut,
       guests: parseInt(bookingData.guests),
@@ -216,9 +264,9 @@ const PropertyRoomDetails = () => {
       totalAmount: totalAmount,
       bookingDate: new Date().toISOString(),
       status: 'confirmed',
-      roomAddress: hotel.address,
-      roomRating: hotel.rating,
-      propertyType: property.type,
+      roomAddress: hotel.address || hotel.location || 'Address not available',
+      roomRating: hotel.rating || hotel.star_rating,
+      propertyType: property?.type || property?.name || 'Unknown Property',
       state: hotel.state
     };
 
@@ -234,13 +282,15 @@ const PropertyRoomDetails = () => {
 
   // Calculate total amount for display
   const calculateTotal = () => {
+    if (!hotel) return 0;
     if (!bookingData.checkIn || !bookingData.checkOut) return ((hotel.price || 0) * 3) + 800;
     
     const checkIn = new Date(bookingData.checkIn);
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+    const roomPrice = hotel.price || hotel.price_per_night || hotel.starting_price || 0;
     
-    return ((hotel.price || 0) * nights) + 800;
+    return (roomPrice * nights) + 800;
   };
 
   const calculateNights = () => {
@@ -249,6 +299,115 @@ const PropertyRoomDetails = () => {
     const checkOut = new Date(bookingData.checkOut);
     return Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
   };
+
+  // Enhanced loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Skeleton Header */}
+          <div className="mb-12">
+            <div className="animate-pulse bg-gray-300 h-10 rounded w-3/4 mb-4"></div>
+            <div className="animate-pulse bg-gray-300 h-6 rounded w-1/2"></div>
+          </div>
+          
+          {/* Skeleton Image Grid */}
+          <div className="mb-16">
+            <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[400px]">
+              <div className="col-span-2 row-span-2 bg-gray-300 rounded-2xl animate-pulse"></div>
+              <div className="bg-gray-300 rounded-2xl animate-pulse"></div>
+              <div className="bg-gray-300 rounded-2xl animate-pulse"></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Skeleton Content */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="animate-pulse bg-gray-300 h-8 rounded w-1/3 mb-4"></div>
+              <div className="animate-pulse bg-gray-300 h-4 rounded w-full mb-2"></div>
+              <div className="animate-pulse bg-gray-300 h-4 rounded w-5/6"></div>
+            </div>
+            
+            {/* Skeleton Sidebar */}
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="animate-pulse bg-gray-300 h-8 rounded w-1/2 mb-6"></div>
+              <div className="space-y-4">
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Enhanced error state
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8 max-w-md">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8">
+            <div className="text-red-600 text-4xl mb-4">⚠️</div>
+            <h3 className="text-red-800 text-xl font-bold mb-3">
+              Failed to Load Hotel
+            </h3>
+            <p className="text-red-600 text-base mb-4">
+              {error}
+            </p>
+            <p className="text-gray-600 text-sm mb-6">
+              Please check if the backend server is running and try again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Retry
+              </button>
+              <button
+                onClick={() => navigate(`/property/${propertyId}`)}
+                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Back to Property
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!property) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8">
+          <div className="text-gray-400 text-6xl mb-4">🏠</div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Property Not Found</h1>
+          <p className="text-gray-600 text-lg">The property you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hotel) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8">
+          <div className="text-gray-400 text-6xl mb-4">🏨</div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Hotel Not Found</h1>
+          <p className="text-gray-600 text-lg">The hotel you're looking for doesn't exist.</p>
+          <button 
+            onClick={() => navigate(`/property/${propertyId}`)}
+            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
+          >
+            Back to {property.type || property.name}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -260,14 +419,14 @@ const PropertyRoomDetails = () => {
           className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200 mb-4"
         >
           <span>←</span>
-          Back to {property.type}
+          Back to {property.type || property.name}
         </button>
       </div>
 
       {/* Hotel Header */}
       <div className="mb-12">
         <div className="flex justify-between items-start mb-3">
-          <h1 className="text-4xl font-bold text-gray-900">{hotel.name}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">{hotel.name || "Unnamed Hotel"}</h1>
           <button 
             onClick={(e) => handleAddToCart(hotel,e)}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors duration-200 p-3 rounded-lg hover:bg-blue-50 border border-blue-200"
@@ -279,13 +438,13 @@ const PropertyRoomDetails = () => {
         <div className="flex flex-wrap items-center gap-3 text-gray-600">
           <div className="flex items-center gap-2 bg-yellow-50 px-3 py-1 rounded-full">
             <span className="text-yellow-500 text-lg">⭐</span>
-            <span className="font-semibold text-gray-800">{hotel.rating || 'N/A'}</span>
+            <span className="font-semibold text-gray-800">{hotel.rating || hotel.star_rating || 'N/A'}</span>
           </div>
           <span className="text-gray-400">•</span>
-          <span className="text-gray-700">{hotel.address}</span>
+          <span className="text-gray-700">{hotel.address || hotel.location || "Address not available"}</span>
           <span className="text-gray-400">•</span>
           <span className="text-gray-700 bg-blue-50 px-3 py-1 rounded-full text-sm">
-            {property.type}
+            {property.type || property.name || "Property Type"}
           </span>
           {hotel.state && (
             <>
@@ -304,26 +463,35 @@ const PropertyRoomDetails = () => {
           {/* Main large image */}
           <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={hotel.image_url || "https://via.placeholder.com/800x600?text=Hotel+Image"}
-              alt={hotel.name}
+              src={hotel.image_url || hotel.image || hotel.photo || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={hotel.name || "Hotel"}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
+              }}
             />
           </div>
 
-          {/* Top-right images */}
+          {/* Additional images */}
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={hotel.image_url_1 || hotel.image_url || "https://via.placeholder.com/400x300?text=View+1"}
-              alt={`${hotel.name} - View 1`}
+              src={hotel.image_url_1 || hotel.image_url || hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={`${hotel.name || "Hotel"} - View 1`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
+              }}
             />
           </div>
 
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={hotel.image_url_2 || hotel.image_url || "https://via.placeholder.com/400x300?text=View+2"}
-              alt={`${hotel.name} - View 2`}
+              src={hotel.image_url_2 || hotel.image_url || hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={`${hotel.name || "Hotel"} - View 2`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
+              }}
             />
           </div>
         </div>
@@ -338,7 +506,7 @@ const PropertyRoomDetails = () => {
               About this Hotel
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              {hotel.description}
+              {hotel.description || hotel.overview || "A comfortable and well-appointed accommodation offering excellent amenities and services for a memorable stay."}
             </p>
           </section>
 
@@ -413,7 +581,7 @@ const PropertyRoomDetails = () => {
                 <FaLocationDot className="w-6 h-6 text-red-500 mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900 text-lg mb-2">Address</p>
-                  <p className="text-gray-700 text-lg">{hotel.address}</p>
+                  <p className="text-gray-700 text-lg">{hotel.address || hotel.location || "Address not available"}</p>
                   {hotel.state && (
                     <p className="text-gray-600 mt-1">{hotel.state}</p>
                   )}
@@ -423,12 +591,12 @@ const PropertyRoomDetails = () => {
           </section>
         </div>
 
-        {/* Booking Sidebar - UPDATED */}
+        {/* Booking Sidebar */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 sticky top-6">
             <div className="flex justify-between items-center mb-6">
               <p className="text-3xl font-bold text-gray-900">
-                ₹{(hotel.price || 0).toLocaleString()}
+                ₹{(hotel.price || hotel.price_per_night || hotel.starting_price || 0).toLocaleString()}
                 <span className="text-lg font-normal text-gray-600"> / night</span>
               </p>
               <button 
