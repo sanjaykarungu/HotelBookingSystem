@@ -27,7 +27,7 @@ const RoomDetails = () => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/hotel/${id}`);
+      const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch room data');
