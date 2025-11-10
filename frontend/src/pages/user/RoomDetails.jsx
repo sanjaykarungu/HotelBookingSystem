@@ -21,31 +21,85 @@ const RoomDetails = () => {
     guests: 1
   });
 
+  // Test backend connection first
+  useEffect(() => {
+    const testBackendConnection = async () => {
+      try {
+        console.log("🔍 Testing backend connection for RoomDetails...");
+        const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
+        
+        if (!testResponse.ok) {
+          throw new Error(`Backend test failed with status: ${testResponse.status}`);
+        }
+        
+        const testData = await testResponse.json();
+        console.log("✅ Backend connection successful:", testData);
+      } catch (testError) {
+        console.error("❌ Backend connection test failed:", testError);
+      }
+    };
+    
+    testBackendConnection();
+  }, []);
+
   // Fetch room data from API
   const fetchRoom = async () => {
     try {
       setLoading(true);
       setError(null);
+      console.log(`🔄 Fetching room details for ID: ${id}`);
       
-      const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`);
+      const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      });
+      
+      console.log("📡 Response status:", response.status);
+      console.log("📡 Response ok:", response.ok);
       
       if (!response.ok) {
-        throw new Error('Failed to fetch room data');
+        const errorText = await response.text();
+        console.error("❌ Response error text:", errorText);
+        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
       }
       
       const data = await response.json();
-      setRoom(data);
+      console.log("📦 Full API response:", data);
+      
+      // Handle different response formats
+      if (data.data) {
+        console.log("✅ Room data found in data.data:", data.data);
+        setRoom(data.data);
+      } else if (data) {
+        console.log("✅ Room data found directly:", data);
+        setRoom(data);
+      } else {
+        console.warn("⚠️ Unexpected data format:", data);
+        throw new Error('Invalid room data format from API');
+      }
       
     } catch (err) {
-      console.error('Error fetching room:', err);
-      setError(err.message);
+      console.error('❌ Error fetching room:', err);
+      console.error('🔍 Error details:', {
+        message: err.message,
+        name: err.name,
+      });
+      setError('Failed to load room details: ' + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchRoom();
+    if (id) {
+      fetchRoom();
+    } else {
+      setError('No room ID provided');
+      setLoading(false);
+    }
   }, [id]);
 
   // Handle input changes
@@ -59,15 +113,18 @@ const RoomDetails = () => {
 
   // Function to handle add to cart
   const handleAddToCart = () => {
-    if (!room) return;
+    if (!room) {
+      alert('Room data not available');
+      return;
+    }
 
     const cartItem = {
       id: room._id || room.id,
-      name: room.name,
-      price: room.price,
-      image: room.image_url,
-      rating: room.rating,
-      address: room.address,
+      name: room.name || 'Unnamed Room',
+      price: room.price || room.price_per_night || room.starting_price || 0,
+      image: room.image_url || room.image || room.photo,
+      rating: room.rating || room.star_rating,
+      address: room.address || room.location || 'Address not available',
       quantity: 1
     };
 
@@ -81,12 +138,16 @@ const RoomDetails = () => {
 
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
+    console.log("🛒 Added to cart:", cartItem);
     alert(`${room.name} added to cart successfully!`);
   }
 
   // Function to handle book now
   const handleBookNow = () => {
-    if (!room) return;
+    if (!room) {
+      alert('Room data not available');
+      return;
+    }
 
     // Validate dates
     if (!bookingData.checkIn || !bookingData.checkOut) {
@@ -101,13 +162,13 @@ const RoomDetails = () => {
     const checkIn = new Date(bookingData.checkIn);
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-    const totalAmount = (room.price * nights) + 80;
+    const totalAmount = ((room.price || 0) * nights) + 80;
 
     // Create booking object
     const newBooking = {
       id: bookingId,
-      hotelName: room.name,
-      hotelImage: room.image_url,
+      hotelName: room.name || 'Unnamed Hotel',
+      hotelImage: room.image_url || room.image || room.photo,
       checkIn: bookingData.checkIn,
       checkOut: bookingData.checkOut,
       guests: parseInt(bookingData.guests),
@@ -115,8 +176,8 @@ const RoomDetails = () => {
       totalAmount: totalAmount,
       bookingDate: new Date().toISOString(),
       status: 'confirmed',
-      roomAddress: room.address,
-      roomRating: room.rating
+      roomAddress: room.address || room.location || 'Address not available',
+      roomRating: room.rating || room.star_rating
     };
 
     // Save to localStorage
@@ -139,7 +200,7 @@ const RoomDetails = () => {
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
     
-    return (room.price * nights) + 80;
+    return ((room.price || 0) * nights) + 80;
   };
 
   const calculateNights = () => {
@@ -149,37 +210,79 @@ const RoomDetails = () => {
     return Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
   };
 
-  // Loading state
+  // Enhanced loading state
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Loading Room Details...</h1>
-          <p className="text-gray-600">Fetching data from API</p>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Skeleton Header */}
+          <div className="mb-12">
+            <div className="animate-pulse bg-gray-300 h-10 rounded w-3/4 mb-4"></div>
+            <div className="animate-pulse bg-gray-300 h-6 rounded w-1/2"></div>
+          </div>
+          
+          {/* Skeleton Image Grid */}
+          <div className="mb-16">
+            <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[400px]">
+              <div className="col-span-2 row-span-2 bg-gray-300 rounded-2xl animate-pulse"></div>
+              <div className="bg-gray-300 rounded-2xl animate-pulse"></div>
+              <div className="bg-gray-300 rounded-2xl animate-pulse"></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Skeleton Content */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="animate-pulse bg-gray-300 h-8 rounded w-1/3 mb-4"></div>
+              <div className="animate-pulse bg-gray-300 h-4 rounded w-full mb-2"></div>
+              <div className="animate-pulse bg-gray-300 h-4 rounded w-5/6"></div>
+            </div>
+            
+            {/* Skeleton Sidebar */}
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="animate-pulse bg-gray-300 h-8 rounded w-1/2 mb-6"></div>
+              <div className="space-y-4">
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+                <div className="animate-pulse bg-gray-300 h-12 rounded"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
-  // Error state
+  // Enhanced error state
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8 max-w-md">
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6">
-            <div className="text-red-600 text-lg font-semibold mb-2">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8">
+            <div className="text-red-600 text-4xl mb-4">⚠️</div>
+            <h3 className="text-red-800 text-xl font-bold mb-3">
               Failed to Load Room
-            </div>
-            <p className="text-red-500 text-sm mb-4">
+            </h3>
+            <p className="text-red-600 text-base mb-4">
               {error}
             </p>
-            <button
-              onClick={fetchRoom}
-              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
-            >
-              Try Again
-            </button>
+            <p className="text-gray-600 text-sm mb-6">
+              Please check if the backend server is running and try again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                onClick={fetchRoom}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Try Again
+              </button>
+              <Link 
+                to="/rooms" 
+                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center"
+              >
+                Back to Rooms
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -190,11 +293,12 @@ const RoomDetails = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
+          <div className="text-gray-400 text-6xl mb-4">🏨</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Room Not Found</h1>
-          <p className="text-gray-600 text-lg">The room you're looking for doesn't exist.</p>
+          <p className="text-gray-600 text-lg mb-6">The room you're looking for doesn't exist or has been removed.</p>
           <Link 
             to="/rooms" 
-            className="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
           >
             Back to Rooms
           </Link>
@@ -205,10 +309,17 @@ const RoomDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Debug Info */}
+      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-blue-700 text-sm">
+          ✅ Room data loaded successfully | ID: {id} | Name: {room.name}
+        </p>
+      </div>
+
       {/* Room Header */}
       <div className="mb-12">
         <div className="flex justify-between items-start mb-3">
-          <h1 className="text-4xl font-bold text-gray-900">{room.name}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">{room.name || "Unnamed Property"}</h1>
           <button 
             onClick={handleAddToCart}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors duration-200 p-3 rounded-lg hover:bg-blue-50 border border-blue-200"
@@ -220,10 +331,13 @@ const RoomDetails = () => {
         <div className="flex flex-wrap items-center gap-3 text-gray-600">
           <div className="flex items-center gap-2 bg-yellow-50 px-3 py-1 rounded-full">
             <span className="text-yellow-500 text-lg">⭐</span>
-            <span className="font-semibold text-gray-800">{room.rating}</span>
+            <span className="font-semibold text-gray-800">{room.rating || room.star_rating || "N/A"}</span>
           </div>
           <span className="text-gray-400">•</span>
-          <span className="text-gray-700">{room.address}</span>
+          <div className="flex items-center gap-1">
+            <IoLocationSharp className="w-4 h-4 text-gray-500" />
+            <span className="text-gray-700">{room.address || room.location || "Address not available"}</span>
+          </div>
         </div>
       </div>
 
@@ -233,8 +347,8 @@ const RoomDetails = () => {
           {/* Main large image */}
           <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={room.image_url}
-              alt={room.name}
+              src={room.image_url || room.image || room.photo || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={room.name || "Hotel"}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               onError={(e) => {
                 e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
@@ -242,11 +356,11 @@ const RoomDetails = () => {
             />
           </div>
 
-          {/* Top-right images */}
+          {/* Additional images */}
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={room.image_url_1 || room.image_url}
-              alt={`${room.name} - View 1`}
+              src={room.image_url_1 || room.image_url || room.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={`${room.name || "Hotel"} - View 1`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               onError={(e) => {
                 e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
@@ -256,8 +370,8 @@ const RoomDetails = () => {
 
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
-              src={room.image_url_2 || room.image_url}
-              alt={`${room.name} - View 2`}
+              src={room.image_url_2 || room.image_url || room.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400"}
+              alt={`${room.name || "Hotel"} - View 2`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               onError={(e) => {
                 e.target.src = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400";
@@ -276,7 +390,7 @@ const RoomDetails = () => {
               About this place
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              {room.description}
+              {room.description || room.overview || "No description available for this property."}
             </p>
           </section>
 
@@ -347,12 +461,7 @@ const RoomDetails = () => {
               Property Details
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Guests will be allocated on the ground floor according to availability. 
-              You get a comfortable Two bedroom apartment has a true city feeling. 
-              The price quoted is for two guest, at the guest slot please mark the 
-              number of guests to get the exact price for groups. The Guests will be 
-              allocated ground floor according to availability. You get the comfortable 
-              two bedroom apartment that has a true city feeling.
+              {room.details || "Guests will be allocated on the ground floor according to availability. You get a comfortable accommodation with a true city feeling. The price quoted is for two guests. Please mark the number of guests to get the exact price for groups."}
             </p>
           </section>
         </div>
@@ -362,7 +471,7 @@ const RoomDetails = () => {
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 sticky top-6">
             <div className="flex justify-between items-center mb-6">
               <p className="text-3xl font-bold text-gray-900">
-                ${room.price}
+                ${room.price || room.price_per_night || room.starting_price || 0}
                 <span className="text-lg font-normal text-gray-600"> / night</span>
               </p>
               <button 
@@ -451,8 +560,8 @@ const RoomDetails = () => {
             <div className="space-y-3 text-gray-600">
               {bookingData.checkIn && bookingData.checkOut && (
                 <div className="flex justify-between text-base">
-                  <span>${room.price} x {calculateNights()} nights</span>
-                  <span className="font-semibold">${room.price * calculateNights()}</span>
+                  <span>${room.price || 0} x {calculateNights()} nights</span>
+                  <span className="font-semibold">${(room.price || 0) * calculateNights()}</span>
                 </div>
               )}
               <div className="flex justify-between text-base">
