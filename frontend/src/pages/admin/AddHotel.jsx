@@ -11,9 +11,7 @@ import {
   IoAlertCircle,
   IoGlobe,
   IoCard,
- 
   IoImages,
-
 } from "react-icons/io5";
 import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import Navbar from "../../components/admin/Navbar";
@@ -265,7 +263,7 @@ const AddHotel = () => {
 
       const apiPromises = [];
 
-      // 1. Hotels API (Direct hotel creation) - This should work
+      // 1. Hotels API (Direct hotel creation)
       if (selectedAPIs.hotels) {
         const hotelsData = {
           ...commonHotelData,
@@ -273,7 +271,7 @@ const AddHotel = () => {
           currency: formData.currency
         };
         apiPromises.push(
-          addHotelToAPISafe('https://hotel-booking-sigma-wine.vercel.app/api/hotel/', hotelsData, 'Hotels')
+          addHotelToAPISafe('https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/', hotelsData, 'Hotels')
         );
       }
 
@@ -298,7 +296,7 @@ const AddHotel = () => {
           united_kingdom: formData.country === 'united_kingdom' ? [commonHotelData] : []
         };
         apiPromises.push(
-          addHotelToAPISafe('https://hotel-booking-sigma-wine.vercel.app/api/world/', worldData, 'World')
+          addHotelToAPISafe('https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/', worldData, 'World')
         );
       }
 
@@ -321,7 +319,7 @@ const AddHotel = () => {
           westbengal: formData.state === 'westbengal' ? [commonHotelData] : []
         };
         apiPromises.push(
-          addHotelToAPISafe('https://hotel-booking-sigma-wine.vercel.app/api/india/', indiaData, 'India')
+          addHotelToAPISafe('https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/', indiaData, 'India')
         );
       }
 
@@ -346,7 +344,7 @@ const AddHotel = () => {
           houseboat: formData.property_type === 'houseboat' ? [commonHotelData] : []
         };
         apiPromises.push(
-          addHotelToAPISafe('https://hotel-booking-sigma-wine.vercel.app/api/property/', propertyData, 'Property')
+          addHotelToAPISafe('https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/', propertyData, 'Property')
         );
       }
 
@@ -496,7 +494,6 @@ const AddHotel = () => {
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Hotel Management</h1>
             <p className="text-gray-600">Add new hotels or manage existing ones across all APIs</p>
-           
           </div>
 
           {/* Success/Error Messages */}
@@ -530,7 +527,6 @@ const AddHotel = () => {
                 </label>
               ))}
             </div>
-          
           </div>
 
           {/* Form */}
