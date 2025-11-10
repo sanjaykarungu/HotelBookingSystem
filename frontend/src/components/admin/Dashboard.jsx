@@ -14,12 +14,12 @@ const Dashboard = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  // All API endpoints
+  // All API endpoints - UPDATED to live server
   const API_ENDPOINTS = [
-    { url: 'https://hotel-booking-backend-qnbg.onrender.com/api/hotel/all', name: 'world' },
-    { url: 'https://hotel-booking-backend-qnbg.onrender.com/api/india/all', name: 'hotel' },
-    { url: 'https://hotel-booking-backend-qnbg.onrender.com/api/world/all', name: 'property' },
-    { url: 'https://hotel-booking-backend-qnbg.onrender.com/api/property/all', name: 'india' }
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/all', name: 'world' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/all', name: 'hotel' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/all', name: 'property' },
+    { url: 'https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/all', name: 'india' }
   ];
 
   // Function to extract hotels from any data structure
@@ -285,19 +285,14 @@ const Dashboard = () => {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-700">Total Hotels</h3>
               <p className="text-3xl font-bold text-blue-600 mt-2">
-                { (
-                  stats.totalHotels
-                )}
+                {stats.totalHotels}
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-700">Active Hotels</h3>
               <p className="text-3xl font-bold text-green-600 mt-2">
-               {(
-                  stats.activeHotels
-                )}
+                {stats.activeHotels}
               </p>
-            
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-700">Total Orders</h3>
