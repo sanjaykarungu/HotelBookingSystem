@@ -11,10 +11,8 @@ const Feature = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("Testing backend connection...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
-        const testData = await testResponse.json();
-        console.log("Backend connection test:", testData);
+        await testResponse.json();
       } catch (testError) {
         console.error("Backend connection test failed:", testError);
       }
@@ -28,7 +26,6 @@ const Feature = () => {
     try {
       setLoading(true);
       setError(null);
-      console.log("Starting API call...");
       
       const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/all', {
         method: 'GET',
@@ -38,42 +35,27 @@ const Feature = () => {
         mode: 'cors'
       });
       
-      console.log("Response status:", response.status);
-      console.log("Response ok:", response.ok);
-      
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Response error text:", errorText);
-        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
-      console.log("Full API response:", data);
       
       // Handle different response formats
       if (data.data && Array.isArray(data.data)) {
-        console.log("Data found in data.data:", data.data.length, "items");
         setFeaturedProperties(data.data);
       } else if (Array.isArray(data)) {
-        console.log("Data found directly:", data.length, "items");
         setFeaturedProperties(data);
       } else if (data.properties && Array.isArray(data.properties)) {
-        console.log("Data found in properties:", data.properties.length, "items");
         setFeaturedProperties(data.properties);
       } else if (data.hotels && Array.isArray(data.hotels)) {
-        console.log("Data found in hotels:", data.hotels.length, "items");
         setFeaturedProperties(data.hotels);
       } else {
-        console.warn("Unexpected data format:", data);
-        throw new Error('Invalid data format from API. Expected array of properties.');
+        throw new Error('Invalid data format from API.');
       }
       
     } catch (err) {
-      console.error('Error fetching featured properties:', err);
-      console.error('Error details:', {
-        message: err.message,
-        name: err.name,
-      });
       setError('Failed to load properties: ' + err.message);
     } finally {
       setLoading(false);
@@ -86,7 +68,6 @@ const Feature = () => {
 
   // Retry function
   const handleRetry = () => {
-    console.log("Retrying API call...");
     fetchFeaturedProperties();
   };
 
@@ -100,9 +81,6 @@ const Feature = () => {
               {feature}
             </h1>
             <div className="w-24 h-1 bg-blue-600 rounded-full mx-auto mb-6"></div>
-            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-              Loading featured properties...
-            </p>
           </div>
           <div className="flex justify-center">
             <div className="animate-pulse flex space-x-4">
@@ -141,10 +119,6 @@ const Feature = () => {
             <div className="w-24 h-1 bg-red-500 rounded-full mx-auto mb-6"></div>
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
               <h3 className="text-red-800 font-semibold text-xl mb-3">Unable to Load Properties</h3>
-              <p className="text-red-600 text-lg mb-4">{error}</p>
-              <p className="text-gray-600 text-sm mb-4">
-                Please check if the backend server is running and try again.
-              </p>
               <div className="flex justify-center gap-4">
                 <button 
                   onClick={handleRetry}
@@ -178,9 +152,6 @@ const Feature = () => {
             <div className="w-24 h-1 bg-yellow-500 rounded-full mx-auto mb-6"></div>
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 max-w-2xl mx-auto">
               <h3 className="text-yellow-800 font-semibold text-xl mb-3">No Properties Found</h3>
-              <p className="text-yellow-600 text-lg mb-4">
-                No featured properties are currently available.
-              </p>
               <button 
                 onClick={handleRetry}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -208,9 +179,6 @@ const Feature = () => {
           <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             Discover our handpicked selection of exceptional properties around the world, 
             offering unparalleled luxury and unforgettable experiences.
-          </p>
-          <p className="text-green-600 text-sm mt-2">
-            ✅ Successfully loaded {featuredProperties.length} properties
           </p>
         </div>
       
@@ -288,7 +256,7 @@ const Feature = () => {
             to="/rooms"
             className="px-8 py-3.5 text-base font-semibold border-2 border-gray-300 rounded-xl bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-sm hover:shadow-md text-gray-700 hover:text-gray-900"
           >
-            View All Destinations ({featuredProperties.length} total)
+            View All Destinations
           </Link>
         </div>
       </div>
