@@ -83,7 +83,6 @@ const CountryRoomDetails = () => {
         setError(null);
       } catch (err) {
         setError(err.message);
-        console.error('Error fetching country and hotel:', err);
       } finally {
         setLoading(false);
       }
@@ -100,7 +99,6 @@ const CountryRoomDetails = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Loading...</h1>
-          <p className="text-gray-600 text-lg">Fetching hotel details...</p>
         </div>
       </div>
     );
@@ -112,7 +110,6 @@ const CountryRoomDetails = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Error</h1>
-          <p className="text-red-500 text-lg mb-6">{error}</p>
           <button
             onClick={() => navigate(`/country/${countryId}`)}
             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -131,9 +128,6 @@ const CountryRoomDetails = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
             Country Not Found
           </h1>
-          <p className="text-gray-600 text-lg">
-            The country you're looking for doesn't exist.
-          </p>
         </div>
       </div>
     );
@@ -146,9 +140,6 @@ const CountryRoomDetails = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
             Hotel Not Found
           </h1>
-          <p className="text-gray-600 text-lg">
-            The hotel you're looking for doesn't exist.
-          </p>
           <button
             onClick={() => navigate(`/country/${countryId}`)}
             className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -217,7 +208,7 @@ const CountryRoomDetails = () => {
     const checkIn = new Date(bookingData.checkIn);
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-    const totalAmount = ((hotel.price || 0) * nights) + 800; // Room price + fees (500 + 300)
+    const totalAmount = ((hotel.price || 0) * nights) + 800;
 
     // Create booking object
     const newBooking = {
@@ -402,7 +393,7 @@ const CountryRoomDetails = () => {
           </section>
         </div>
 
-        {/* Booking Sidebar - UPDATED */}
+        {/* Booking Sidebar */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 sticky top-6">
             <div className="flex justify-between items-center mb-6">
@@ -489,12 +480,8 @@ const CountryRoomDetails = () => {
               </button>
             </div>
 
-            <p className="text-center text-gray-500 text-sm my-6">
-              You won't be charged yet
-            </p>
-
             {/* Price Breakdown */}
-            <div className="space-y-3 text-gray-600">
+            <div className="space-y-3 text-gray-600 mt-6">
               <div className="flex justify-between text-base">
                 <span>₹{(hotel.price || 0).toLocaleString()} x {calculateNights()} nights</span>
                 <span className="font-semibold">
