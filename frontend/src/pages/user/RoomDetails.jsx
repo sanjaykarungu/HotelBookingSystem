@@ -25,17 +25,15 @@ const RoomDetails = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("🔍 Testing backend connection for RoomDetails...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
         
         if (!testResponse.ok) {
           throw new Error(`Backend test failed with status: ${testResponse.status}`);
         }
         
-        const testData = await testResponse.json();
-        console.log("✅ Backend connection successful:", testData);
+        await testResponse.json();
       } catch (testError) {
-        console.error("❌ Backend connection test failed:", testError);
+        console.error("Backend connection test failed:", testError);
       }
     };
     
@@ -47,7 +45,6 @@ const RoomDetails = () => {
     try {
       setLoading(true);
       setError(null);
-      console.log(`🔄 Fetching room details for ID: ${id}`);
       
       const response = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/hotel/${id}`, {
         method: 'GET',
@@ -57,36 +54,23 @@ const RoomDetails = () => {
         },
       });
       
-      console.log("📡 Response status:", response.status);
-      console.log("📡 Response ok:", response.ok);
-      
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("❌ Response error text:", errorText);
-        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
-      console.log("📦 Full API response:", data);
       
       // Handle different response formats
       if (data.data) {
-        console.log("✅ Room data found in data.data:", data.data);
         setRoom(data.data);
       } else if (data) {
-        console.log("✅ Room data found directly:", data);
         setRoom(data);
       } else {
-        console.warn("⚠️ Unexpected data format:", data);
         throw new Error('Invalid room data format from API');
       }
       
     } catch (err) {
-      console.error('❌ Error fetching room:', err);
-      console.error('🔍 Error details:', {
-        message: err.message,
-        name: err.name,
-      });
       setError('Failed to load room details: ' + err.message);
     } finally {
       setLoading(false);
@@ -138,7 +122,6 @@ const RoomDetails = () => {
 
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
-    console.log("🛒 Added to cart:", cartItem);
     alert(`${room.name} added to cart successfully!`);
   }
 
@@ -259,16 +242,9 @@ const RoomDetails = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8 max-w-md">
           <div className="bg-red-50 border border-red-200 rounded-xl p-8">
-            <div className="text-red-600 text-4xl mb-4">⚠️</div>
             <h3 className="text-red-800 text-xl font-bold mb-3">
               Failed to Load Room
             </h3>
-            <p className="text-red-600 text-base mb-4">
-              {error}
-            </p>
-            <p className="text-gray-600 text-sm mb-6">
-              Please check if the backend server is running and try again.
-            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={fetchRoom}
@@ -293,9 +269,7 @@ const RoomDetails = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
-          <div className="text-gray-400 text-6xl mb-4">🏨</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Room Not Found</h1>
-          <p className="text-gray-600 text-lg mb-6">The room you're looking for doesn't exist or has been removed.</p>
           <Link 
             to="/rooms" 
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
@@ -309,13 +283,6 @@ const RoomDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Debug Info */}
-      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-        <p className="text-blue-700 text-sm">
-          ✅ Room data loaded successfully | ID: {id} | Name: {room.name}
-        </p>
-      </div>
-
       {/* Room Header */}
       <div className="mb-12">
         <div className="flex justify-between items-start mb-3">
@@ -552,12 +519,8 @@ const RoomDetails = () => {
               </button>
             </div>
 
-            <p className="text-center text-gray-500 text-sm my-6">
-              You won't be charged yet
-            </p>
-
             {/* Price Breakdown */}
-            <div className="space-y-3 text-gray-600">
+            <div className="space-y-3 text-gray-600 mt-6">
               {bookingData.checkIn && bookingData.checkOut && (
                 <div className="flex justify-between text-base">
                   <span>${room.price || 0} x {calculateNights()} nights</span>
