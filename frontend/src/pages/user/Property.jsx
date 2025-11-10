@@ -17,7 +17,7 @@ const Property = () => {
     const fetchProperties = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://hotel-booking-sigma-wine.vercel.app/api/property/all');
+        const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/property/all');
         
         if (!response.ok) {
           throw new Error('Failed to fetch properties data');
