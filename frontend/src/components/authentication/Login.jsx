@@ -30,54 +30,77 @@ const Login = () => {
       return;
     }
 
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.gmail)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
     setIsSubmitting(true);
     setError("");
 
     try {
       console.log("🔐 Attempting login for:", formData.gmail);
       
-      // Use the login endpoint from your backend API
+      const loginData = {
+        gmail: formData.gmail,
+        password: formData.password
+      };
+
+      console.log("📤 Sending login data:", loginData);
+
       const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/register/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          gmail: formData.gmail,
-          password: formData.password
-        })
+        body: JSON.stringify(loginData)
       });
 
+      console.log("📥 Response status:", response.status);
+      console.log("📥 Response ok:", response.ok);
+
       const data = await response.json();
-      
-      console.log("API Response:", data);
+      console.log("📥 Full API Response:", data);
 
       if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+        // Handle different types of error responses
+        if (data.errors) {
+          const errorMessages = Object.values(data.errors).flat().join(', ');
+          throw new Error(errorMessages);
+        }
+        throw new Error(data.message || data.error || `Login failed with status: ${response.status}`);
       }
 
       // Login successful
       console.log("✅ Login successful:", data);
       
       // Store user data and token in localStorage
-      if (data.data && data.token) {
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('currentUser', JSON.stringify(data.data));
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('userProfile', JSON.stringify(data.data));
-        
-        // Also update registeredUsers for compatibility
+      const userData = data.user || data.data;
+      if (userData && (data.token || data.accessToken)) {
         const userProfile = {
-          id: data.data._id,
-          name: data.data.name,
-          email: data.data.gmail,
-          phone: data.data.number,
-          joinDate: data.data.createdAt || new Date().toISOString(),
-          bookings: []
+          id: userData._id || userData.id,
+          name: userData.name,
+          email: userData.gmail || userData.email,
+          gmail: userData.gmail || userData.email,
+          phone: userData.number || userData.phone,
+          number: userData.number || userData.phone,
+          joinDate: userData.createdAt || new Date().toISOString(),
+          bookings: userData.bookings || []
         };
+
+        const authToken = data.token || data.accessToken;
+
+        // Store authentication data
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('currentUser', JSON.stringify(userProfile));
+        localStorage.setItem('authToken', authToken);
+        localStorage.setItem('userProfile', JSON.stringify(userProfile));
         
+        // Update registeredUsers for compatibility
         let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-        const existingUserIndex = registeredUsers.findIndex(user => user.email === data.data.gmail);
+        const existingUserIndex = registeredUsers.findIndex(user => user.email === userProfile.email);
         
         if (existingUserIndex === -1) {
           registeredUsers.push(userProfile);
@@ -86,28 +109,90 @@ const Login = () => {
         }
         
         localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+        console.log("📦 User data stored:", userProfile);
       }
 
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true');
+        localStorage.setItem('rememberedUser', JSON.stringify(formData.gmail));
+      } else {
+        localStorage.removeItem('rememberMe');
+        localStorage.removeItem('rememberedUser');
       }
       
-      console.log("🎉 Login successful! User:", data.data.name);
+      console.log("🎉 Login successful! User:", userData?.name);
       setShowModal(true);
       
     } catch (error) {
       console.error("❌ Error during login:", error);
-      setError(error.message || "Login failed. Please check your credentials and try again.");
+      
+      // More specific error messages
+      if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+        setError("Network error: Unable to connect to server. Please check your internet connection.");
+      } else if (error.message.includes('invalid') || error.message.includes('credentials') || error.message.includes('password')) {
+        setError("Invalid email or password. Please check your credentials and try again.");
+      } else if (error.message.includes('not found') || error.message.includes('exist')) {
+        setError("No account found with this email. Please check your email or register for a new account.");
+      } else {
+        setError(error.message || "Login failed. Please check your credentials and try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // Test API connection
+  const testAPIConnection = async () => {
+    try {
+      console.log("🔍 Testing login API connection...");
+      const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/register/login', {
+        method: 'OPTIONS' // Use OPTIONS to test CORS and connectivity without actual login
+      });
+      console.log("Login API Test Response:", response.status);
+      if (response.ok) {
+        console.log("✅ Login API is reachable");
+        alert("Login API is reachable! Status: " + response.status);
+      } else {
+        console.log("❌ Login API returned error:", response.status);
+        alert("Login API error. Status: " + response.status);
+      }
+    } catch (error) {
+      console.error("❌ Login API connection test failed:", error);
+      alert("Login API connection failed: " + error.message);
+    }
+  };
+
   const handleModalClose = () => {
     setShowModal(false);
+    
+    // Trigger storage event to update all components
     window.dispatchEvent(new Event('storage'));
+    
+    // Trigger custom auth event
+    window.dispatchEvent(new CustomEvent('authStateChange', {
+      detail: { 
+        isLoggedIn: true, 
+        user: JSON.parse(localStorage.getItem('currentUser') || '{}') 
+      }
+    }));
+    
     navigate('/', { replace: true });
   };
+
+  // Load remembered email on component mount
+  React.useEffect(() => {
+    const remembered = localStorage.getItem('rememberMe');
+    const rememberedUser = localStorage.getItem('rememberedUser');
+    
+    if (remembered === 'true' && rememberedUser) {
+      setRememberMe(true);
+      setFormData(prev => ({
+        ...prev,
+        gmail: rememberedUser
+      }));
+    }
+  }, []);
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center" style={{backgroundImage: 'url("https://i.pinimg.com/736x/1e/f2/55/1ef255bcbb8a6af42634e88867b3e076.jpg")'}}>
@@ -138,13 +223,21 @@ const Login = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">Welcome Back</h1>
           <p className="text-gray-200 drop-shadow-md">Sign in to your account</p>
+          
+          {/* Debug button - remove in production */}
+          <button 
+            onClick={testAPIConnection}
+            className="mt-2 px-4 py-2 bg-gray-600 text-white rounded text-sm hover:bg-gray-700 transition-colors"
+          >
+            Test Login API Connection
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white/20 backdrop-blur-md shadow-2xl rounded-2xl border border-white/30 p-8 space-y-6">
           {/* Error Message */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-              {error}
+              <strong className="block">Error:</strong> {error}
             </div>
           )}
 
