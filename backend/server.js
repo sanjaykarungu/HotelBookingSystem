@@ -13,7 +13,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://hotel-booking-system-green-delta.vercel.app' ],
+  origin: ['http://localhost:3000', 'https://hotel-booking-ays8.vercel.app', 'https://hotel-booking-system-green-delta.vercel.app' ],
   credentials: true
 }));
 app.use(express.json());
