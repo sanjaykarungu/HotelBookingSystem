@@ -13,7 +13,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://hotel-booking-frontend-h4r4.onrender.com', 'https://hotel-booking-ays8.vercel.app'],
+  origin: ['http://localhost:3000', 'https://hotel-booking-frontend-h4r4.onrender.com', 'https://hotel-booking-ays8.vercel.app', 'https://hotelbookingsystem-backend-4c8d.onrender.com'],
   credentials: true
 }));
 app.use(express.json());
