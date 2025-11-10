@@ -29,7 +29,7 @@ const CountryRoomDetails = () => {
         setLoading(true);
         
         // Fetch country data
-        const countryResponse = await fetch(`https://hotel-booking-sigma-wine.vercel.app/api/world/${countryId}`);
+        const countryResponse = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/world/${countryId}`);
         
         if (!countryResponse.ok) {
           throw new Error('Failed to fetch country data');
