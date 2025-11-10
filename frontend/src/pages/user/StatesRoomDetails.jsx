@@ -26,17 +26,15 @@ const StatesRoomDetails = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("🔍 Testing backend connection for StatesRoomDetails...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
         
         if (!testResponse.ok) {
           throw new Error(`Backend test failed with status: ${testResponse.status}`);
         }
         
-        const testData = await testResponse.json();
-        console.log("✅ Backend connection successful:", testData);
+        await testResponse.json();
       } catch (testError) {
-        console.error("❌ Backend connection test failed:", testError);
+        console.error("Backend connection test failed:", testError);
       }
     };
     
@@ -49,7 +47,6 @@ const StatesRoomDetails = () => {
       try {
         setLoading(true);
         setError(null);
-        console.log(`🔄 Fetching state data for ID: ${stateId}`);
         
         // Fetch the state data
         const stateResponse = await fetch(`https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/${stateId}`, {
@@ -60,25 +57,18 @@ const StatesRoomDetails = () => {
           },
         });
         
-        console.log("📡 State response status:", stateResponse.status);
-        console.log("📡 State response ok:", stateResponse.ok);
-        
         if (!stateResponse.ok) {
           const errorText = await stateResponse.text();
-          console.error("❌ State response error text:", errorText);
-          throw new Error(`Failed to fetch state data: ${stateResponse.status} - ${stateResponse.statusText}`);
+          throw new Error(`Failed to fetch state data: ${stateResponse.status}`);
         }
         
         const stateData = await stateResponse.json();
-        console.log("📦 Full state API response:", stateData);
         
         // Handle different state response formats
         let actualStateData = null;
         if (stateData.data) {
-          console.log("✅ State data found in data.data");
           actualStateData = stateData.data;
         } else if (stateData) {
-          console.log("✅ State data found directly");
           actualStateData = stateData;
         } else {
           throw new Error('Invalid state data format from API');
@@ -87,14 +77,11 @@ const StatesRoomDetails = () => {
         setState(actualStateData);
         
         // Find the hotel within the state - try multiple approaches
-        console.log(`🔍 Looking for hotel with ID: ${hotelId} in state data`);
-        
         let foundHotel = null;
         
         // Approach 1: Look in state-specific array (e.g., state.kerala, state.goa, etc.)
         const stateName = actualStateData.state ? actualStateData.state.toLowerCase().replace(' ', '') : '';
         if (stateName && actualStateData[stateName] && Array.isArray(actualStateData[stateName])) {
-          console.log(`🔍 Checking state.${stateName} array`);
           foundHotel = actualStateData[stateName].find(item => 
             item._id === hotelId || 
             item.id === hotelId || 
@@ -104,7 +91,6 @@ const StatesRoomDetails = () => {
         
         // Approach 2: Look in hotels array
         if (!foundHotel && actualStateData.hotels && Array.isArray(actualStateData.hotels)) {
-          console.log("🔍 Checking state.hotels array");
           foundHotel = actualStateData.hotels.find(item => 
             item._id === hotelId || 
             item.id === hotelId || 
@@ -114,7 +100,6 @@ const StatesRoomDetails = () => {
         
         // Approach 3: Look in properties array
         if (!foundHotel && actualStateData.properties && Array.isArray(actualStateData.properties)) {
-          console.log("🔍 Checking state.properties array");
           foundHotel = actualStateData.properties.find(item => 
             item._id === hotelId || 
             item.id === hotelId || 
@@ -124,10 +109,8 @@ const StatesRoomDetails = () => {
         
         // Approach 4: Look for any array in the state data
         if (!foundHotel) {
-          console.log("🔍 Searching all arrays in state data");
           for (const key in actualStateData) {
             if (Array.isArray(actualStateData[key])) {
-              console.log(`🔍 Checking state.${key} array`);
               foundHotel = actualStateData[key].find(item => 
                 item._id === hotelId || 
                 item.id === hotelId || 
@@ -139,19 +122,12 @@ const StatesRoomDetails = () => {
         }
         
         if (!foundHotel) {
-          console.error("❌ Hotel not found in state data. Available keys:", Object.keys(actualStateData));
           throw new Error('Hotel not found in the state data');
         }
         
-        console.log("✅ Hotel found:", foundHotel);
         setHotel(foundHotel);
         
       } catch (err) {
-        console.error('❌ Error fetching state and hotel:', err);
-        console.error('🔍 Error details:', {
-          message: err.message,
-          name: err.name,
-        });
         setError('Failed to load hotel details: ' + err.message);
       } finally {
         setLoading(false);
@@ -210,7 +186,6 @@ const StatesRoomDetails = () => {
     existingCart.push(cartItem);
     localStorage.setItem('roomCart', JSON.stringify(existingCart));
     
-    console.log('🛒 Added to cart:', cartItem);
     alert(`${hotel.name || 'Hotel'} added to cart successfully!`);
   }
 
@@ -235,7 +210,7 @@ const StatesRoomDetails = () => {
     const checkOut = new Date(bookingData.checkOut);
     const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
     const roomPrice = hotel.price || hotel.price_per_night || hotel.starting_price || 0;
-    const totalAmount = (roomPrice * nights) + 800; // Room price + fees (500 + 300)
+    const totalAmount = (roomPrice * nights) + 800;
 
     // Create booking object
     const newBooking = {
@@ -333,16 +308,9 @@ const StatesRoomDetails = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8 max-w-md">
           <div className="bg-red-50 border border-red-200 rounded-xl p-8">
-            <div className="text-red-600 text-4xl mb-4">⚠️</div>
             <h3 className="text-red-800 text-xl font-bold mb-3">
               Failed to Load Hotel
             </h3>
-            <p className="text-red-600 text-base mb-4">
-              {error}
-            </p>
-            <p className="text-gray-600 text-sm mb-6">
-              Please check if the backend server is running and try again.
-            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button 
                 onClick={() => window.location.reload()} 
@@ -367,9 +335,7 @@ const StatesRoomDetails = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
-          <div className="text-gray-400 text-6xl mb-4">🏨</div>
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Hotel Not Found</h1>
-          <p className="text-gray-600 text-lg mb-6">The hotel you're looking for doesn't exist or has been removed.</p>
           <button 
             onClick={() => navigate('/')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200 text-lg"
@@ -383,13 +349,6 @@ const StatesRoomDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Debug Info */}
-      <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-        <p className="text-green-700 text-sm">
-          ✅ Hotel data loaded successfully | State ID: {stateId} | Hotel ID: {hotelId}
-        </p>
-      </div>
-
       {/* Hotel Header */}
       <div className="mb-12">
         <div className="flex justify-between items-start mb-3">
@@ -615,12 +574,8 @@ const StatesRoomDetails = () => {
               </button>
             </div>
 
-            <p className="text-center text-gray-500 text-sm my-6">
-              You won't be charged yet
-            </p>
-
             {/* Price Breakdown */}
-            <div className="space-y-3 text-gray-600">
+            <div className="space-y-3 text-gray-600 mt-6">
               <div className="flex justify-between text-base">
                 <span>₹{(hotel.price || 0).toLocaleString()} x {calculateNights()} nights</span>
                 <span className="font-semibold">₹{((hotel.price || 0) * calculateNights()).toLocaleString()}</span>
