@@ -285,11 +285,7 @@ const Rooms = () => {
               Discover our handpicked selection of exceptional properties around the world, 
               offering unparalleled luxury and unforgettable experiences.
             </p>
-            <div className="mt-4 bg-green-50 border border-green-200 rounded-lg px-4 py-2 inline-block">
-              <p className="text-green-700 text-sm font-medium">
-                ✅ Successfully loaded {hotels.length} properties
-              </p>
-            </div>
+           
           </div>
 
           {/* Results Count */}
