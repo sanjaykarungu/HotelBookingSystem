@@ -16,17 +16,15 @@ const India = () => {
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log("🔍 Testing backend connection for India component...");
         const testResponse = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/');
         
         if (!testResponse.ok) {
           throw new Error(`Backend test failed with status: ${testResponse.status}`);
         }
         
-        const testData = await testResponse.json();
-        console.log("✅ Backend connection successful:", testData);
+        await testResponse.json();
       } catch (testError) {
-        console.error("❌ Backend connection test failed:", testError);
+        console.error("Backend connection test failed:", testError);
       }
     };
     
@@ -39,7 +37,6 @@ const India = () => {
       try {
         setLoading(true);
         setError(null);
-        console.log("🔄 Fetching states data from API...");
         
         const response = await fetch('https://hotelbookingsystem-backend-4c8d.onrender.com/api/india/all', {
           method: 'GET',
@@ -49,42 +46,27 @@ const India = () => {
           },
         });
         
-        console.log("📡 Response status:", response.status);
-        console.log("📡 Response ok:", response.ok);
-        
         if (!response.ok) {
           const errorText = await response.text();
-          console.error("❌ Response error text:", errorText);
-          throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log("📦 Full API response:", data);
         
         // Handle different response formats
         if (data.data && Array.isArray(data.data)) {
-          console.log(`✅ States data found in data.data: ${data.data.length} items`);
           setStatesData(data.data);
         } else if (Array.isArray(data)) {
-          console.log(`✅ States data found directly: ${data.length} items`);
           setStatesData(data);
         } else if (data.states && Array.isArray(data.states)) {
-          console.log(`✅ States data found in states: ${data.states.length} items`);
           setStatesData(data.states);
         } else if (data.india && Array.isArray(data.india)) {
-          console.log(`✅ States data found in india: ${data.india.length} items`);
           setStatesData(data.india);
         } else {
-          console.warn("⚠️ Unexpected data format:", data);
-          setStatesData([]); // Set empty array instead of throwing error
+          setStatesData([]);
         }
         
       } catch (err) {
-        console.error('❌ Error fetching states:', err);
-        console.error('🔍 Error details:', {
-          message: err.message,
-          name: err.name,
-        });
         setError('Failed to load states: ' + err.message);
       } finally {
         setLoading(false);
@@ -95,8 +77,7 @@ const India = () => {
   }, []);
 
   const handleStates = (state) => {
-    console.log("🔗 Navigating to state:", state.state || state.name);
-    navigate(`/states/${state._id || state.id}`); // Using MongoDB _id or id
+    navigate(`/states/${state._id || state.id}`);
   }
 
   const settings = {
@@ -166,9 +147,6 @@ const India = () => {
             <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
               Explore Incredible India
             </h1>
-            <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Loading amazing destinations...
-            </p>
           </div>
           
           {/* Skeleton Loading */}
@@ -199,16 +177,9 @@ const India = () => {
               Explore Incredible India
             </h1>
             <div className="bg-red-50 border border-red-200 rounded-xl p-8 max-w-2xl mx-auto">
-              <div className="text-red-600 text-4xl mb-4">⚠️</div>
               <h3 className="text-red-800 text-xl font-bold mb-3">
                 Failed to Load Destinations
               </h3>
-              <p className="text-red-600 text-base mb-4">
-                {error}
-              </p>
-              <p className="text-gray-600 text-sm mb-6">
-                Please check if the backend server is running and try again.
-              </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <button 
                   onClick={() => window.location.reload()} 
@@ -240,16 +211,9 @@ const India = () => {
               Explore Incredible India
             </h1>
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 max-w-2xl mx-auto">
-              <div className="text-yellow-600 text-4xl mb-4">🏔️</div>
               <h3 className="text-yellow-800 text-xl font-bold mb-3">
                 No Destinations Available
               </h3>
-              <p className="text-yellow-600 text-base mb-4">
-                No Indian states are currently available in our database.
-              </p>
-              <p className="text-gray-600 text-sm mb-6">
-                This might be a temporary issue. Please try refreshing the page.
-              </p>
               <button 
                 onClick={() => window.location.reload()} 
                 className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
@@ -266,13 +230,6 @@ const India = () => {
   return (
     <section className="px-5 py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        {/* Success Indicator */}
-        <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-center">
-          <p className="text-green-700 text-sm font-medium">
-            ✅ Successfully loaded {statesData.length} Indian destinations
-          </p>
-        </div>
-
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div className="text-center md:text-left mb-6 md:mb-0">
@@ -337,7 +294,7 @@ const India = () => {
                       )}
                       <div className="flex justify-center">
                         <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all duration-200">
-                          Explore {item.state || item.name}
+                          Explore
                           <span className="text-lg">→</span>
                         </span>
                       </div>
@@ -348,14 +305,6 @@ const India = () => {
             ))}
           </Slider>
         </div>
-
-        {/* Footer Info */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-500 text-sm">
-            Showing {statesData.length} amazing destinations across India
-          </p>
-        </div>
-
       </div>
     </section>
   );
