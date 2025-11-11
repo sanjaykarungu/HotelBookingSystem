@@ -91,35 +91,48 @@ const India = () => {
     pauseOnHover: true,
     responsive: [
       {
-        breakpoint: 1280,
+        breakpoint: 1280, // Desktop
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1024,
+        breakpoint: 1024, // Small Desktop / Tablet Landscape
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 640,
+        breakpoint: 768, // Tablet
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '60px',
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 640, // Large Mobile
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '40px',
+        },
+      },
+      {
+        breakpoint: 480, // Mobile
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '30px',
+        },
+      },
+      {
+        breakpoint: 375, // Small Mobile
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
