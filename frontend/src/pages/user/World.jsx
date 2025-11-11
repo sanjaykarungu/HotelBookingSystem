@@ -274,18 +274,24 @@ const World = () => {
                     </div>
                     
                     {/* Content Container */}
-                    <div className="p-6 text-center">
-                      <h3 className="font-bold text-gray-900 text-xl mb-4">
+                    <div className="p-6">
+                      <h3 className="font-bold text-gray-900 text-xl mb-3 text-center">
                         {item.country || item.name || "Unnamed Country"}
                       </h3>
                       
                       {(item.capital || item.capital_city) && (
-                        <div className="flex items-center justify-center gap-2 mb-4">
+                        <div className="flex items-center justify-center gap-2 mb-3">
                           <span className="text-lg">🏛️</span>
                           <p className="font-semibold text-gray-700 text-base">
                             {item.capital || item.capital_city}
                           </p>
                         </div>
+                      )}
+                      
+                      {(item.description || item.overview) && (
+                        <p className="text-gray-500 text-base leading-relaxed mb-4 text-center">
+                          {item.description || item.overview}
+                        </p>
                       )}
                       
                       <button 
