@@ -11,7 +11,6 @@ const India = () => {
   const [statesData, setStatesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Test backend connection first
   useEffect(() => {
@@ -244,55 +243,56 @@ const India = () => {
           </div>
         </div>
 
-        {/* Mobile View - Simple One State Display */}
+        {/* Mobile Slider - Single Slide */}
         <div className="block md:hidden">
-          <div 
-            className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden cursor-pointer"
-            onClick={() => handleStates(statesData[currentSlide])}
+          <Slider 
+            ref={sliderRef}
+            dots={false}
+            arrows={false}
+            infinite={true}
+            speed={500}
+            slidesToShow={1}
+            slidesToScroll={1}
           >
-            {/* Image Container */}
-            <div className="overflow-hidden rounded-t-2xl">
-              <img
-                src={statesData[currentSlide]?.image_url || statesData[currentSlide]?.image || statesData[currentSlide]?.photo || "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400"}
-                alt={statesData[currentSlide]?.state || statesData[currentSlide]?.name || "Indian Destination"}
-                className="w-full h-64 object-cover"
-                onError={(e) => {
-                  e.target.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400";
-                }}
-              />
-            </div>
-            
-            {/* Content Container */}
-            <div className="p-6 text-center">
-              <h3 className="font-bold text-gray-900 text-xl mb-4">
-                {statesData[currentSlide]?.state || statesData[currentSlide]?.name || "Unnamed State"}
-              </h3>
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleStates(statesData[currentSlide]);
-                }}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors w-full"
-              >
-                Explore
-              </button>
-            </div>
-          </div>
-
-          {/* Simple Mobile Dots */}
-          <div className="flex justify-center mt-6">
-            <div className="flex space-x-2">
-              {statesData.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+            {statesData.map((item, index) => (
+              <div key={item._id || item.id || index} className="px-2">
+                <div 
+                  className="cursor-pointer"
+                  onClick={() => handleStates(item)}
+                >
+                  <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                    {/* Image Container */}
+                    <div className="overflow-hidden rounded-t-2xl">
+                      <img
+                        src={item.image_url || item.image || item.photo || "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400"}
+                        alt={item.state || item.name || "Indian Destination"}
+                        className="w-full h-64 object-cover"
+                        onError={(e) => {
+                          e.target.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400";
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Content Container */}
+                    <div className="p-6 text-center">
+                      <h3 className="font-bold text-gray-900 text-xl mb-4">
+                        {item.state || item.name || "Unnamed State"}
+                      </h3>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleStates(item);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors w-full"
+                      >
+                        Explore
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
         </div>
 
         {/* Desktop Slider */}
