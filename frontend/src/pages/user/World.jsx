@@ -107,24 +107,8 @@ const World = () => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '20px',
         },
       },
     ],
@@ -141,7 +125,7 @@ const World = () => {
   // Enhanced loading state with skeleton
   if (loading) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
@@ -150,13 +134,12 @@ const World = () => {
           </div>
           
           {/* Skeleton Loading */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((item) => (
               <div key={item} className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div className="animate-pulse bg-gray-300 h-48 md:h-56"></div>
                 <div className="p-6 text-center">
                   <div className="animate-pulse bg-gray-300 h-6 rounded w-3/4 mx-auto mb-3"></div>
-                  <div className="animate-pulse bg-gray-300 h-4 rounded w-1/2 mx-auto mb-2"></div>
                   <div className="animate-pulse bg-gray-300 h-4 rounded w-full mb-2"></div>
                   <div className="animate-pulse bg-gray-300 h-4 rounded w-2/3 mx-auto"></div>
                 </div>
@@ -171,7 +154,7 @@ const World = () => {
   // Enhanced error state
   if (error) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
@@ -205,7 +188,7 @@ const World = () => {
   // Empty state
   if (!countriesData || countriesData.length === 0) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
@@ -229,7 +212,7 @@ const World = () => {
   }
 
   return (
-    <section className="px-5 py-16 bg-gray-50">
+    <section className="px-4 py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
@@ -241,7 +224,8 @@ const World = () => {
               Most popular places in the world. Let's enjoy this journey!
             </p>
           </div>
-          <div className="flex gap-3">
+          {/* Desktop Only Arrows */}
+          <div className="hidden md:flex gap-3">
             <button 
               onClick={prevSlide} 
               className="w-12 h-12 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md"
@@ -259,16 +243,78 @@ const World = () => {
           </div>
         </div>
 
-        {/* Slider Section */}
-        <div className="slider-container relative">
+        {/* Mobile Slider - Single Slide */}
+        <div className="block md:hidden">
+          <Slider 
+            ref={sliderRef}
+            dots={false}
+            arrows={false}
+            infinite={true}
+            speed={500}
+            slidesToShow={1}
+            slidesToScroll={1}
+          >
+            {countriesData.map((item, index) => (
+              <div key={item._id || item.id || index} className="px-2">
+                <div 
+                  className="cursor-pointer"
+                  onClick={() => handleCountry(item)}
+                >
+                  <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                    {/* Image Container */}
+                    <div className="overflow-hidden rounded-t-2xl">
+                      <img
+                        src={item.image_url || item.image || item.photo || "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=400"}
+                        alt={item.country || item.name || "Country"}
+                        className="w-full h-64 object-cover"
+                        onError={(e) => {
+                          e.target.src = "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=400";
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Content Container */}
+                    <div className="p-6 text-center">
+                      <h3 className="font-bold text-gray-900 text-xl mb-4">
+                        {item.country || item.name || "Unnamed Country"}
+                      </h3>
+                      
+                      {(item.capital || item.capital_city) && (
+                        <div className="flex items-center justify-center gap-2 mb-4">
+                          <span className="text-lg">🏛️</span>
+                          <p className="font-semibold text-gray-700 text-base">
+                            {item.capital || item.capital_city}
+                          </p>
+                        </div>
+                      )}
+                      
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCountry(item);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors w-full"
+                      >
+                        Explore
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Desktop Slider */}
+        <div className="hidden md:block slider-container relative">
           <Slider ref={sliderRef} {...settings}>
             {countriesData.map((item, index) => (
-              <div key={item._id || item.id || index} className="px-2 sm:px-3 focus:outline-none">
+              <div key={item._id || item.id || index} className="px-3 focus:outline-none">
                 <div 
                   className="cursor-pointer group"
                   onClick={() => handleCountry(item)}
                 >
-                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 border border-gray-100 overflow-hidden mx-1 sm:mx-2">
+                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 overflow-hidden">
                     {/* Image Container */}
                     <div className="overflow-hidden rounded-t-2xl relative">
                       <img
@@ -284,8 +330,8 @@ const World = () => {
                     </div>
                     
                     {/* Content Container */}
-                    <div className="p-4 sm:p-6 text-center">
-                      <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-3 group-hover:text-blue-600 transition-colors duration-200">
+                    <div className="p-6 text-center">
+                      <h3 className="font-bold text-gray-900 text-lg md:text-xl mb-3 group-hover:text-blue-600 transition-colors duration-200">
                         {item.country || item.name || "Unnamed Country"}
                       </h3>
                       
@@ -299,13 +345,13 @@ const World = () => {
                       )}
                       
                       {(item.description || item.overview) && (
-                        <p className="text-gray-500 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4">
+                        <p className="text-gray-500 text-sm md:text-base leading-relaxed line-clamp-3 mb-4">
                           {item.description || item.overview}
                         </p>
                       )}
                       
                       <div className="flex justify-center">
-                        <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all duration-200">
+                        <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm md:text-base group-hover:gap-2 transition-all duration-200">
                           Explore
                           <span className="text-lg">→</span>
                         </span>
