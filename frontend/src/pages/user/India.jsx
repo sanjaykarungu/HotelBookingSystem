@@ -109,8 +109,7 @@ const India = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '60px',
+          centerMode: false, // Disabled center mode
         },
       },
       {
@@ -118,8 +117,7 @@ const India = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '40px',
+          centerMode: false, // Disabled center mode
         },
       },
       {
@@ -127,17 +125,7 @@ const India = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '30px',
-        },
-      },
-      {
-        breakpoint: 375, // Small Mobile
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '20px',
+          centerMode: false, // Disabled center mode
         },
       },
     ],
@@ -154,20 +142,20 @@ const India = () => {
   // Enhanced loading state with skeleton
   if (loading) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
+            <h1 className="font-bold text-gray-900 text-3xl md:text-5xl mb-6">
               Explore Incredible India
             </h1>
           </div>
           
           {/* Skeleton Loading */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[1, 2, 3, 4].map((item) => (
               <div key={item} className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div className="animate-pulse bg-gray-300 h-48 md:h-56"></div>
-                <div className="p-6 text-center">
+                <div className="p-4 md:p-6 text-center">
                   <div className="animate-pulse bg-gray-300 h-6 rounded w-3/4 mx-auto mb-3"></div>
                   <div className="animate-pulse bg-gray-300 h-4 rounded w-full mb-2"></div>
                   <div className="animate-pulse bg-gray-300 h-4 rounded w-2/3 mx-auto"></div>
@@ -183,14 +171,14 @@ const India = () => {
   // Enhanced error state
   if (error) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
+            <h1 className="font-bold text-gray-900 text-3xl md:text-5xl mb-6">
               Explore Incredible India
             </h1>
-            <div className="bg-red-50 border border-red-200 rounded-xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-red-800 text-xl font-bold mb-3">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-6 md:p-8 max-w-2xl mx-auto">
+              <h3 className="text-red-800 text-lg md:text-xl font-bold mb-3">
                 Failed to Load Destinations
               </h3>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -217,14 +205,14 @@ const India = () => {
   // Empty state
   if (!statesData || statesData.length === 0) {
     return (
-      <section className="px-5 py-16 bg-gray-50">
+      <section className="px-4 py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
+            <h1 className="font-bold text-gray-900 text-3xl md:text-5xl mb-6">
               Explore Incredible India
             </h1>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-yellow-800 text-xl font-bold mb-3">
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 md:p-8 max-w-2xl mx-auto">
+              <h3 className="text-yellow-800 text-lg md:text-xl font-bold mb-3">
                 No Destinations Available
               </h3>
               <button 
@@ -241,32 +229,32 @@ const India = () => {
   }
 
   return (
-    <section className="px-5 py-16 bg-gray-50">
+    <section className="px-4 py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12">
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <h1 className="font-bold text-gray-900 text-4xl md:text-5xl mb-6">
+            <h1 className="font-bold text-gray-900 text-3xl md:text-5xl mb-4 md:mb-6">
               Explore Incredible India
             </h1>
-            <p className="text-gray-600 text-lg md:text-xl max-w-2xl leading-relaxed">
+            <p className="text-gray-600 text-base md:text-xl max-w-2xl leading-relaxed">
               Discover the diverse beauty, rich heritage, and vibrant cultures of India's most amazing states.
             </p>
           </div>
           <div className="flex gap-3">
             <button 
               onClick={prevSlide} 
-              className="w-12 h-12 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md"
               aria-label="Previous slide"
             >
-              <span className="text-2xl text-gray-700">←</span>
+              <span className="text-xl md:text-2xl text-gray-700">←</span>
             </button>
             <button 
               onClick={nextSlide} 
-              className="w-12 h-12 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 border border-gray-300 shadow-sm hover:shadow-md"
               aria-label="Next slide"
             >
-              <span className="text-2xl text-gray-700">→</span>
+              <span className="text-xl md:text-2xl text-gray-700">→</span>
             </button>
           </div>
         </div>
@@ -280,33 +268,33 @@ const India = () => {
                   className="cursor-pointer group"
                   onClick={() => handleStates(item)}
                 >
-                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 border border-gray-100 overflow-hidden mx-1 sm:mx-2">
+                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 overflow-hidden mx-auto max-w-sm md:max-w-none">
                     {/* Image Container */}
                     <div className="overflow-hidden rounded-t-2xl relative">
                       <img
                         src={item.image_url || item.image || item.photo || "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400"}
                         alt={item.state || item.name || "Indian Destination"}
-                        className="w-full h-48 md:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           e.target.src = "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400";
                         }}
                       />
                       {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     
                     {/* Content Container */}
-                    <div className="p-4 sm:p-6 text-center">
-                      <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-3 group-hover:text-blue-600 transition-colors duration-200">
+                    <div className="p-4 md:p-6 text-center">
+                      <h3 className="font-bold text-gray-900 text-lg md:text-xl mb-3 group-hover:text-blue-600 transition-colors duration-200">
                         {item.state || item.name || "Unnamed State"}
                       </h3>
                       {(item.description || item.overview) && (
-                        <p className="text-gray-500 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4">
+                        <p className="text-gray-500 text-sm md:text-base leading-relaxed line-clamp-2 mb-4">
                           {item.description || item.overview}
                         </p>
                       )}
                       <div className="flex justify-center">
-                        <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all duration-200">
+                        <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm md:text-base group-hover:gap-2 transition-all duration-200">
                           Explore
                           <span className="text-lg">→</span>
                         </span>
@@ -317,6 +305,18 @@ const India = () => {
               </div>
             ))}
           </Slider>
+        </div>
+
+        {/* Mobile Dots Indicator */}
+        <div className="flex justify-center mt-8 md:hidden">
+          <div className="flex space-x-2">
+            {statesData.slice(0, 5).map((_, index) => (
+              <div
+                key={index}
+                className="w-2 h-2 rounded-full bg-gray-300"
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
