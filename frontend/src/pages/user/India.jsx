@@ -274,10 +274,18 @@ const India = () => {
                     </div>
                     
                     {/* Content Container */}
-                    <div className="p-6 text-center">
-                      <h3 className="font-bold text-gray-900 text-xl mb-4">
+                    <div className="p-6">
+                      <h3 className="font-bold text-gray-900 text-xl mb-3 text-center">
                         {item.state || item.name || "Unnamed State"}
                       </h3>
+                      
+                      {/* Description */}
+                      {(item.description || item.overview) && (
+                        <p className="text-gray-500 text-base leading-relaxed mb-4 text-center">
+                          {item.description || item.overview}
+                        </p>
+                      )}
+                      
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
@@ -324,11 +332,14 @@ const India = () => {
                       <h3 className="font-bold text-gray-900 text-lg md:text-xl mb-3 group-hover:text-blue-600 transition-colors duration-200">
                         {item.state || item.name || "Unnamed State"}
                       </h3>
+                      
+                      {/* Description */}
                       {(item.description || item.overview) && (
                         <p className="text-gray-500 text-sm md:text-base leading-relaxed line-clamp-3 mb-4">
                           {item.description || item.overview}
                         </p>
                       )}
+                      
                       <div className="flex justify-center">
                         <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm md:text-base group-hover:gap-2 transition-all duration-200">
                           Explore
